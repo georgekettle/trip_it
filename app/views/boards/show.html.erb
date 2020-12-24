@@ -1,0 +1,7 @@
+<a href="#" onclick="history.back()">Go Back</a>
+<h1><%= @board.title %></h1>
+<% @board.users.each do |user| %>
+  <%= link_to "#{user.email}", profile_path(user.id) %>
+<% end %>
+
+<%= link_to "Destroy", board_path(@board), :method => :delete %>

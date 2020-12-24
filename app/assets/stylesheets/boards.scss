@@ -1,0 +1,14 @@
+// Place all the styles related to the boards controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+.board-card {
+  padding: 20px;
+  border-radius: 20px
+}
+
+.board-card-photos {
+  height: 70px;
+  width: 120px;
+  background: gray;
+  border-radius: 10px
+}

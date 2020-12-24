@@ -106,6 +106,10 @@ input[type=submit] {
   padding-bottom: 10%;
 }
 
+.page-content {
+  padding-top: 70px;
+}
+
 .display-none {
   display: none
 }

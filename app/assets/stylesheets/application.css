@@ -34,14 +34,29 @@ div {
 
 h1, h2, h3 {
   font-family: GT Walsheim Pro;
-  font-weight: 700;
-  color: black;
-}
-
-h1, h2, h3 {
-  font-family: GT Walsheim Pro;
   font-weight: 500;
   color: black;
+  margin: 0px;
+  margin-bottom: 30px;
+}
+
+h4, h5, h6 {
+  font-family: GT Walsheim Pro;
+  font-weight: 400;
+  color: black;
+  margin: 0px;
+  margin-bottom: 10px;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+  opacity: 1;
+  transition: ease 0.2s
+}
+
+a:hover {
+  opacity: 0.5;
 }
 
 input {
@@ -59,15 +74,40 @@ input[type=submit] {
   padding: 10px 15px;
 }
 
-/*input {
+.button-sml {
+  padding: 5px 10px;
+  border-radius: 12px;
+  border: 1px solid black;
+  font-size: 15px;
+}
 
-}*/
+.button-med {
+  padding: 10px 15px;
+  border-radius: 15px;
+  border: 1px solid black;
+}
+
+.button-lrg {
+  padding: 12px 20px;
+  border-radius: 20px;
+  border: 1px solid black;
+  font-size: 20px;
+}
+
+.button-color {
+  background: black;
+  color: white;
+}
 
 .page-container {
   width: 100vw;
   height: 100vh;
   padding: 20px;
   padding-bottom: 10%;
+}
+
+.display-none {
+  display: none
 }
 
 .text-center {
@@ -78,6 +118,12 @@ input[type=submit] {
   display: flex;
   align-items: center;
   justify-content: center
+}
+
+.flex-space-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .flex-direction-column {

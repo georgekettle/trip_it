@@ -1,0 +1,11 @@
+<div class="navbar flex-space-between">
+  <h3 id="logo">trip.it</h3>
+  <div class="navbar-right">
+    <% if current_user %>
+      <%= link_to "Logout", destroy_user_session_path, :method => :delete %>
+    <% else %>
+      <%= link_to "Login", new_user_session_path, class: "button-sml" %>
+      <%= link_to "Sign Up", new_user_registration_path, class: "button-sml button-color" %>
+    <% end %>
+  </div>
+</div>

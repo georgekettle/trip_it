@@ -1,0 +1,31 @@
+.alert {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  bottom: 20px;
+  right: 20px;
+  padding: 15px 20px;
+  background: black;
+  border-radius: 10px;
+  margin: 0px;
+  animation-name: alert;
+  animation-duration: 4s;
+  transform: translateX(calc(100% + 30px));
+  max-width: 300px;
+  color: white;
+}
+
+.alert-danger {
+  background-color: #ff4b4b;
+}
+
+.alert-success {
+  background-color: #74ce5c;
+}
+
+@keyframes alert {
+  0%   {transform: translateX(calc(100% + 30px))}
+  8%  {transform: translateX(0px)}
+  92%  {transform: translateX(0px)}
+  100%   {transform: translateX(calc(100% + 30px))}
+}

@@ -10,10 +10,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_24_061747) do
+ActiveRecord::Schema.define(version: 2020_12_24_065630) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "board_users", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "board_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["board_id"], name: "index_board_users_on_board_id"
+    t.index ["user_id"], name: "index_board_users_on_user_id"
+  end
+
+  create_table "boards", force: :cascade do |t|
+    t.string "title"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "photos", force: :cascade do |t|
+    t.string "url"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "posts", force: :cascade do |t|
     t.text "title", null: false
@@ -21,6 +42,10 @@ ActiveRecord::Schema.define(version: 2020_12_24_061747) do
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "board_id", null: false
+    t.bigint "photo_id", null: false
+    t.index ["board_id"], name: "index_posts_on_board_id"
+    t.index ["photo_id"], name: "index_posts_on_photo_id"
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
@@ -36,5 +61,9 @@ ActiveRecord::Schema.define(version: 2020_12_24_061747) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "board_users", "boards"
+  add_foreign_key "board_users", "users"
+  add_foreign_key "posts", "boards"
+  add_foreign_key "posts", "photos"
   add_foreign_key "posts", "users"
 end

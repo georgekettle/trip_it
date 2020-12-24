@@ -1,6 +1,7 @@
 class SearchController < ApplicationController
+  skip_before_action :authenticate_user!
   def search
-    p "--- SEARCH ---"
+    @search_query = params[:search]
     # redirect_to root_url
   end
 end

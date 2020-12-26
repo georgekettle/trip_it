@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_24_065630) do
+ActiveRecord::Schema.define(version: 2020_12_26_042127) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,10 +30,20 @@ ActiveRecord::Schema.define(version: 2020_12_24_065630) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "locations", force: :cascade do |t|
+    t.float "latitude", null: false
+    t.float "longitude", null: false
+    t.bigint "post_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["post_id"], name: "index_locations_on_post_id"
+  end
+
   create_table "photos", force: :cascade do |t|
     t.string "url"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "cloudinary_id", null: false
   end
 
   create_table "posts", force: :cascade do |t|
@@ -63,6 +73,7 @@ ActiveRecord::Schema.define(version: 2020_12_24_065630) do
 
   add_foreign_key "board_users", "boards"
   add_foreign_key "board_users", "users"
+  add_foreign_key "locations", "posts"
   add_foreign_key "posts", "boards"
   add_foreign_key "posts", "photos"
   add_foreign_key "posts", "users"

@@ -6,17 +6,14 @@ class PostsController < ApplicationController
 
   def new
     @post = Post.new
+    @post.locations = [Location.new]
   end
 
   def create
     @post = Post.new(post_params)
     @post.user = current_user
-
-    if params[:post][:photo]
-      cloudinary_obj = Cloudinary::Uploader.upload(params[:post][:photo])
-      @photo = Photo.new(url: cloudinary_obj["secure_url"])
-      @post.photo = @photo
-    end
+    create_photo
+    create_locations
 
     respond_to do |format|
       if @post.save
@@ -52,6 +49,24 @@ class PostsController < ApplicationController
     end
   end
 private
+  def create_locations
+    @post.locations.each do |location|
+      byebug
+      location.save
+    end
+  end
+
+  def create_photo
+    if params[:post][:photo]
+      cloudinary_obj = Cloudinary::Uploader.upload(params[:post][:photo])
+      @photo = Photo.new(url: cloudinary_obj["secure_url"], cloudinary_id: cloudinary_obj["public_id"])
+      if @photo.save
+        @post.photo_id = @photo.id
+      else
+        Cloudinary::Api.delete_resources([cloudinary_obj["public_id"]])
+      end
+    end
+  end
   # Use callbacks to share common setup or constraints between actions.
   def set_post
     @post = Post.find(params[:id])
@@ -59,6 +74,6 @@ private
 
   # Only allow a list of trusted parameters through.
   def post_params
-    params.require(:post).permit(:title, :description, :board_id)
+    params.require(:post).permit(:title, :description, :board_id, :photo_id, locations_attributes: [:id, :longitude, :latitude, :_destroy])
   end
 end

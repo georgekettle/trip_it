@@ -74,6 +74,13 @@ input[type=submit] {
   padding: 10px 15px;
 }
 
+select {
+  padding: 10px;
+  border-radius: 10px;
+  background: #ececec;
+  border: none;
+}
+
 .button-sml {
   padding: 5px 10px;
   border-radius: 12px;

@@ -29,7 +29,8 @@
   <% if post.photo %>
     <%= render :partial => post.photo, photo: post.photo %>
     <%= form.number_field :photo_id %>
-<!--     <p>Can't update photo yet... instead create new post</p>-->  <% else %>
+<!--     <p>Can't update photo yet... instead create new post</p>-->
+  <% else %>
     <%= form.file_field :photo %>
   <% end %>
 
@@ -38,6 +39,6 @@
   <% end %>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit "Create Post", data: { disable_with: "Please wait..." } %>
   </div>
 <% end %>

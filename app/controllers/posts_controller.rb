@@ -13,7 +13,7 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
     @post.user = current_user
     create_photo
-    create_locations
+    # create_locations
 
     respond_to do |format|
       if @post.save
@@ -49,12 +49,11 @@ class PostsController < ApplicationController
     end
   end
 private
-  def create_locations
-    @post.locations.each do |location|
-      byebug
-      location.save
-    end
-  end
+  # def create_locations
+  #   @post.locations.each do |location|
+  #     location.save
+  #   end
+  # end
 
   def create_photo
     if params[:post][:photo]

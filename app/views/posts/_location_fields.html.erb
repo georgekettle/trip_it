@@ -1,0 +1,81 @@
+<div class="nested-fields">
+  <%= form.hidden_field :_destroy %>
+  <div>
+      <%= form.label :longitude %>
+      <%= form.text_field :longitude, id: 'longitude' %>
+  </div>
+  <div>
+      <%= form.label :latitude %>
+      <%= form.text_field :latitude, id: 'latitude' %>
+  </div>
+  <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.5.1/mapbox-gl-geocoder.min.js"></script>
+<link
+rel="stylesheet"
+href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.5.1/mapbox-gl-geocoder.css"
+type="text/css"
+/>
+<!-- Promise polyfill script required to use Mapbox GL Geocoder in IE 11 -->
+<script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
+  <div id='select-location' style='width: 400px; height: 300px;'></div>
+    <script>
+        var longitudeField = document.getElementById('longitude');
+        var latitudeField = document.getElementById('latitude');
+
+        mapboxgl.accessToken = "<%= ENV['MAPBOX_TOKEN'] %>";
+        var map = new mapboxgl.Map({
+          container: 'select-location',
+          style: 'mapbox://styles/mapbox/streets-v11',
+          zoom: 3,
+          center: [longitudeField.value, latitudeField.value]
+        });
+
+        // location form fields
+        function setLocationFields(lng, lat) {
+          longitudeField.value = lng;
+          latitudeField.value = lat;
+        };
+
+        // marker
+        var marker = new mapboxgl.Marker({
+              color: "black",
+              draggable: true
+            })
+              .setLngLat([longitudeField.value, latitudeField.value])
+              <% if form.object.longitude && form.object.latitude %>
+                .addTo(map)
+              <% end %>;
+
+        // geocoder
+        var geocoder = new MapboxGeocoder({
+            accessToken: mapboxgl.accessToken,
+            mapboxgl: mapboxgl
+          });
+
+        geocoder.on('result', function(e) {
+          marker.setLngLat(e.result.center).addTo(map);
+          setLocationFields(...e.result.center);
+          geocoder.clear();
+        });
+
+        map.addControl(geocoder);
+
+        // marker functionality
+        marker.on('dragend', function(e) {
+          // The event object (e) contains information like the
+          // coordinates of the point on the map that was clicked.
+          // console.log('A click event has occurred at ' + this.getLngLat());
+          var lngLat = this.getLngLat();
+          setLocationFields(lngLat.lng, lngLat.lat);
+        });
+
+        map.on('click', function(e) {
+          // marker.setLngLat([e.lngLat])
+          marker.setLngLat([e.lngLat.lng, e.lngLat.lat]).addTo(map);
+          setLocationFields(e.lngLat.lng, e.lngLat.lat);
+        });
+      </script>
+  <!-- <div>
+      <%= link_to "Remove", '#', class: "remove_fields" %>
+  </div> -->
+</div>

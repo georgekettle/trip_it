@@ -26,9 +26,19 @@
     <%= collection_select(:post, :board_id, current_user.boards, :id, :title, prompt: true) %>
   </div>
 
-  <%= form.file_field :photo %>
+  <% if post.photo %>
+    <%= render :partial => post.photo, photo: post.photo %>
+    <%= form.number_field :photo_id %>
+<!--     <p>Can't update photo yet... instead create new post</p>-->
+  <% else %>
+    <%= form.file_field :photo %>
+  <% end %>
+
+  <%= form.fields_for :locations do |locations_form| %>
+    <%= render "location_fields", form: locations_form %>
+  <% end %>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit "Create Post", data: { disable_with: "Please wait..." } %>
   </div>
 <% end %>

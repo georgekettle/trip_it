@@ -4,4 +4,16 @@
   <%= link_to "#{user.email}", profile_path(user.id) %>
 <% end %>
 
+<%= link_to "Edit", edit_board_path(@board) %>
 <%= link_to "Destroy", board_path(@board), :method => :delete %>
+
+<div>
+  <% @board.posts.each do |post| %>
+    <%= link_to post_path(post) do %>
+      <div class="post-card">
+        <%= image_tag post.photo.url %>
+        <h3><%= post.title %></h3>
+      </div>
+    <% end %>
+  <% end %>
+</div>

@@ -22,7 +22,7 @@
           container: 'map',
           style: 'mapbox://styles/mapbox/streets-v11',
           center: <%= location.coordinates %>,
-          zoom: 8
+          zoom: 9
         });
         var marker = new mapboxgl.Marker({
           color: "black"
@@ -33,4 +33,4 @@
   <% end %>
 </div>
 
-<%= image_tag @post.photo.url %>
+<%= image_tag @post.photo.url, style: 'width:400px;' %>

@@ -1,5 +1,7 @@
 <div class="navbar flex-space-between">
-  <h3 id="logo">trip.it</h3>
+  <%= link_to root_path do %>
+    <h3 id="logo">trip.it</h3>
+  <% end %>
   <div class="navbar-right">
     <% if current_user %>
       <%= link_to "+ Add Post", new_post_path %>

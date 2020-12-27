@@ -13,4 +13,8 @@ class Post < ApplicationRecord
   def has_location
     errors.add(:location, 'cannot be blank') if self.locations.blank?
   end
+
+  def photo_popularity
+    self.photo.post_count
+  end
 end

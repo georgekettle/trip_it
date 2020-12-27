@@ -1,1 +1,10 @@
-<h1>Search results for "<%= @search_query %>"</h1>
+<div class="search-page-container">
+  <div class="search-page-results">
+    <!-- results go here -->
+    <% @posts.each do |post| %>
+      <%= image_tag post.photo.url, style: 'width:400px;' %>
+      <p><%= post.title %></p>
+    <% end %>
+  </div>
+  <div id="map" class="side-map-sticky" data-controller="map" data-mapbox-token="<%= ENV['MAPBOX_TOKEN'] %>" data-center="<%= @lng_lat %>"></div>
+</div>

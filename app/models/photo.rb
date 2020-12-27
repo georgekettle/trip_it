@@ -2,6 +2,10 @@ class Photo < ApplicationRecord
   has_many :posts
   before_destroy :cleanup
 
+  def post_count
+    self.posts.count
+  end
+
   private
 
   def cleanup

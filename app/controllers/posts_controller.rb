@@ -73,6 +73,6 @@ private
 
   # Only allow a list of trusted parameters through.
   def post_params
-    params.require(:post).permit(:title, :description, :board_id, :photo_id, locations_attributes: [:id, :longitude, :latitude, :_destroy])
+    params.require(:post).permit(:title, :description, :board_id, :photo_id, locations_attributes: [:id, :longitude, :latitude, :address, :_destroy])
   end
 end

@@ -2,7 +2,7 @@ import { Controller } from 'stimulus';
 
 export default class extends Controller {
   connect() {
-    this.locations = this.element.dataset.locations;
+    this.locations = JSON.parse(this.element.dataset.locations);
     this.posts = this.element.dataset.posts;
     this.coords = JSON.parse(this.element.dataset.center);
     this.mapboxToken = this.element.dataset.mapboxToken;
@@ -18,15 +18,15 @@ export default class extends Controller {
       zoom: 9
     });
 
-    console.log(JSON.parse(this.locations));
+    console.log(this.locations);
 
     JSON.parse(this.posts).forEach(post => {
       var location = post.location;
       var el = document.createElement('div');
       el.className = 'marker';
-      el.dataset.posts = [location.post_id];
 
-      var postCards = Array.from(document.querySelectorAll(`#post-${location.post_id}`));
+      var postCards = Array.from(document.querySelectorAll(`[data-location="${location.id}"]`));
+      console.log(postCards);
 
       el.addEventListener('mouseenter', (e) => {
         // add class to each of the associated posts

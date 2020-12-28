@@ -13,10 +13,12 @@
   background-color: black;
 
   &:hover {
-    background-color: red
+    background-color: red;
+    z-index: 1;
   }
 }
 
 .marker.active {
-  background-color: red
+  background-color: red;
+  z-index: 1;
 }

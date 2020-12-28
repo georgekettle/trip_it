@@ -3,11 +3,8 @@
     <h3><%= @posts.count %> results found</h3>
     <!-- results go here -->
     <% @posts.each do |post| %>
-      <div id="post-<%= post.id %>" class="post-card">
-        <%= image_tag post.photo.url, style: 'width:400px;' %>
-        <p><%= post.title %></p>
-      </div>
+      <%= render 'posts/post', post: post %>
     <% end %>
   </div>
-  <div id="map" class="side-map-sticky" data-controller="map" data-mapbox-token="<%= ENV['MAPBOX_TOKEN'] %>" data-center="<%= @lng_lat %>" data-posts="<%= @posts.to_json(include: [:photo, :location]) %>" data-locations="<%= @locations.to_json %>"></div>
+  <div id="map" class="side-map-sticky" data-controller="map" data-mapbox-token="<%= ENV['MAPBOX_TOKEN'] %>" data-center="<%= @lng_lat %>" data-posts="<%= @posts.to_json(include: [:photo, :location]) %>" data-locations="<%= @locations.to_json(include: :location) %>"></div>
 </div>

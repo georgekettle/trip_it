@@ -7,6 +7,6 @@ class SearchController < ApplicationController
     locations_near = Location.near(@lat_lng, @radius, units: :km)
     @posts = Post.where(location: locations_near.to_a).sort_by(&:photo_popularity).first(20)
     locations = @posts.group_by(&:location)
-    @locations = locations.each_with_object({}) { |(k, v), location| location[k.attributes] = v }
+    @locations = locations.each_with_object({}) { |(k, v), location| location[k.id] = v }
   end
 end

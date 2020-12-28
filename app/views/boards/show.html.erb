@@ -10,10 +10,7 @@
 <div>
   <% @board.posts.each do |post| %>
     <%= link_to post_path(post) do %>
-      <div class="post-card">
-        <%= image_tag post.photo.url, style: 'width:400px;' %>
-        <h3><%= post.title %></h3>
-      </div>
+      <%= render 'posts/post', post: post %>
     <% end %>
   <% end %>
 </div>

@@ -6,17 +6,17 @@ class PostsController < ApplicationController
 
   def new
     @post = Post.new
-    @post.locations = [Location.new]
+    @post.location = Location.new
   end
 
   def create
     @post = Post.new(post_params)
     @post.user = current_user
     create_photo
-    # create_locations
+    create_location
 
     respond_to do |format|
-      if @post.save
+      if @post.save && @post.location.save
         format.html { redirect_to @post, success: 'Post was successfully created.' }
         format.json { render :show, status: :created, location: @post }
       else
@@ -49,11 +49,11 @@ class PostsController < ApplicationController
     end
   end
 private
-  # def create_locations
-  #   @post.locations.each do |location|
-  #     location.save
-  #   end
-  # end
+  def create_location
+    byebug
+    Location.where(longitude: post_params[:location_attributes][:longitude], latitude: post_params[:location_attributes][:latitude])
+    @post.location = Location.new(post_params[:location_attributes])
+  end
 
   def create_photo
     if params[:post][:photo]
@@ -73,6 +73,6 @@ private
 
   # Only allow a list of trusted parameters through.
   def post_params
-    params.require(:post).permit(:title, :description, :board_id, :photo_id, locations_attributes: [:id, :longitude, :latitude, :address, :_destroy])
+    params.require(:post).permit(:title, :description, :board_id, :photo_id, location_attributes: [:id, :longitude, :latitude, :address])
   end
 end

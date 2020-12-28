@@ -9,5 +9,5 @@
       </div>
     <% end %>
   </div>
-  <div id="map" class="side-map-sticky" data-controller="map" data-mapbox-token="<%= ENV['MAPBOX_TOKEN'] %>" data-center="<%= @lng_lat %>" data-posts="<%= @posts.to_json(include: [:photo, :locations]) %>"></div>
+  <div id="map" class="side-map-sticky" data-controller="map" data-mapbox-token="<%= ENV['MAPBOX_TOKEN'] %>" data-center="<%= @lng_lat %>" data-posts="<%= @posts.to_json(include: [:photo, :location]) %>" data-locations="<%= @locations.to_json %>"></div>
 </div>

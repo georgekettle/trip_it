@@ -34,8 +34,8 @@
     <%= form.file_field :photo %>
   <% end %>
 
-  <%= form.fields_for :locations do |locations_form| %>
-    <%= render "location_fields", form: locations_form %>
+  <%= form.fields_for :location do |location_form| %>
+    <%= render "location_fields", form: location_form %>
   <% end %>
 
   <div class="actions">

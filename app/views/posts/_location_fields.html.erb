@@ -1,5 +1,4 @@
 <div class="nested-fields">
-  <%= form.hidden_field :_destroy %>
   <div>
       <%= form.label :address %>
       <%= form.text_field :address, id: 'address' %>
@@ -13,67 +12,64 @@
       <%= form.text_field :latitude, id: 'latitude' %>
   </div>
   <div id='select-location' style='width: 400px; height: 300px;'></div>
-    <script>
-        var longitudeField = document.getElementById('longitude');
-        var latitudeField = document.getElementById('latitude');
-        var addressField = document.getElementById('address');
+  <script>
+      var longitudeField = document.getElementById('longitude');
+      var latitudeField = document.getElementById('latitude');
+      var addressField = document.getElementById('address');
 
-        mapboxgl.accessToken = "<%= ENV['MAPBOX_TOKEN'] %>";
-        var map = new mapboxgl.Map({
-          container: 'select-location',
-          style: 'mapbox://styles/mapbox/streets-v11',
-          zoom: 3,
-          center: [longitudeField.value, latitudeField.value]
+      mapboxgl.accessToken = "<%= ENV['MAPBOX_TOKEN'] %>";
+      var map = new mapboxgl.Map({
+        container: 'select-location',
+        style: 'mapbox://styles/mapbox/streets-v11',
+        zoom: 3,
+        center: [longitudeField.value, latitudeField.value]
+      });
+
+      // location form fields
+      function setLocationFields(lng, lat, address) {
+        longitudeField.value = lng;
+        latitudeField.value = lat;
+        addressField.value = address;
+      };
+
+      // marker
+      var marker = new mapboxgl.Marker({
+            color: "black",
+            draggable: true
+          })
+            .setLngLat([longitudeField.value, latitudeField.value])
+            <% if @post.location && @post.location.longitude && @post.location.latitude %>
+              .addTo(map)
+            <% end %>;
+
+      // geocoder
+      var geocoder = new MapboxGeocoder({
+          accessToken: mapboxgl.accessToken,
+          mapboxgl: mapboxgl
         });
 
-        // location form fields
-        function setLocationFields(lng, lat, address) {
-          longitudeField.value = lng;
-          latitudeField.value = lat;
-          addressField.value = address;
-        };
+      geocoder.on('result', function(e) {
+        console.log(e.result);
+        marker.setLngLat(e.result.center).addTo(map);
+        setLocationFields(...e.result.center, e.result.place_name);
+        geocoder.clear();
+      });
 
-        // marker
-        var marker = new mapboxgl.Marker({
-              color: "black",
-              draggable: true
-            })
-              .setLngLat([longitudeField.value, latitudeField.value])
-              <% if form.object.longitude && form.object.latitude %>
-                .addTo(map)
-              <% end %>;
+      map.addControl(geocoder);
 
-        // geocoder
-        var geocoder = new MapboxGeocoder({
-            accessToken: mapboxgl.accessToken,
-            mapboxgl: mapboxgl
-          });
+      // // marker functionality
+      // marker.on('dragend', function(e) {
+      //   // The event object (e) contains information like the
+      //   // coordinates of the point on the map that was clicked.
+      //   // console.log('A click event has occurred at ' + this.getLngLat());
+      //   var lngLat = this.getLngLat();
+      //   setLocationFields(lngLat.lng, lngLat.lat);
+      // });
 
-        geocoder.on('result', function(e) {
-          console.log(e.result);
-          marker.setLngLat(e.result.center).addTo(map);
-          setLocationFields(...e.result.center, e.result.place_name);
-          geocoder.clear();
-        });
-
-        map.addControl(geocoder);
-
-        // // marker functionality
-        // marker.on('dragend', function(e) {
-        //   // The event object (e) contains information like the
-        //   // coordinates of the point on the map that was clicked.
-        //   // console.log('A click event has occurred at ' + this.getLngLat());
-        //   var lngLat = this.getLngLat();
-        //   setLocationFields(lngLat.lng, lngLat.lat);
-        // });
-
-        // map.on('click', function(e) {
-        //   // marker.setLngLat([e.lngLat])
-        //   marker.setLngLat([e.lngLat.lng, e.lngLat.lat]).addTo(map);
-        //   setLocationFields(e.lngLat.lng, e.lngLat.lat);
-        // });
-      </script>
-  <!-- <div>
-      <%= link_to "Remove", '#', class: "remove_fields" %>
-  </div> -->
+      // map.on('click', function(e) {
+      //   // marker.setLngLat([e.lngLat])
+      //   marker.setLngLat([e.lngLat.lng, e.lngLat.lat]).addTo(map);
+      //   setLocationFields(e.lngLat.lng, e.lngLat.lat);
+      // });
+    </script>
 </div>

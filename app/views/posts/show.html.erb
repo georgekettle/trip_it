@@ -9,28 +9,27 @@
 </div>
 
 <div>
-  <h3>Locations:</h3>
-  <% @post.locations.each do |location| %>
-    <div style="border: 1px solid black;padding: 10px">
-      <p>latitude: <%= location.latitude %></p>
-      <p>longitude: <%= location.longitude %></p>
-    </div>
-    <div id='map' style='width: 400px; height: 300px;'></div>
-    <script>
-        mapboxgl.accessToken = "<%= ENV['MAPBOX_TOKEN'] %>";
-        var map = new mapboxgl.Map({
-          container: 'map',
-          style: 'mapbox://styles/mapbox/streets-v11',
-          center: <%= location.coordinates %>,
-          zoom: 9
-        });
-        var marker = new mapboxgl.Marker({
-          color: "black"
-        })
-          .setLngLat(<%= location.coordinates %>)
-          .addTo(map);
-      </script>
-  <% end %>
+  <h3>Location:</h3>
+  <% location = @post.location %>
+  <div style="border: 1px solid black;padding: 10px">
+    <p>latitude: <%= location.latitude %></p>
+    <p>longitude: <%= location.longitude %></p>
+  </div>
+  <div id='map' style='width: 400px; height: 300px;'></div>
+  <script>
+      mapboxgl.accessToken = "<%= ENV['MAPBOX_TOKEN'] %>";
+      var map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/streets-v11',
+        center: <%= location.coordinates %>,
+        zoom: 9
+      });
+      var marker = new mapboxgl.Marker({
+        color: "black"
+      })
+        .setLngLat(<%= location.coordinates %>)
+        .addTo(map);
+    </script>
 </div>
 
 <%= image_tag @post.photo.url, style: 'width:400px;' %>

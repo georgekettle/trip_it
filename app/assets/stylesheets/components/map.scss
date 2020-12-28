@@ -5,3 +5,20 @@
   flex-shrink: 0;
   top: 70
 }
+
+.marker {
+  width: 15px;
+  height: 15px;
+  border-radius: 15px;
+  background-color: black;
+
+  &:hover {
+    background-color: red;
+    z-index: 1;
+  }
+}
+
+.marker.active {
+  background-color: red;
+  z-index: 1;
+}

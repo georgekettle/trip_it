@@ -1,6 +1,8 @@
 class Location < ApplicationRecord
-  belongs_to :post
-  validates :longitude, :latitude, :post, presence: true
+  has_many :posts
+  validates :longitude, :latitude, presence: true
+  validates :latitude, uniqueness: { scope: :longitude }
+
   geocoded_by :address
   reverse_geocoded_by :latitude, :longitude
   after_validation :geocode, if: :address_changed?

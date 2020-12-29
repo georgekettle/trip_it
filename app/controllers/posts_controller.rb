@@ -50,8 +50,7 @@ class PostsController < ApplicationController
   end
 private
   def create_location
-    Location.where(longitude: post_params[:location_attributes][:longitude], latitude: post_params[:location_attributes][:latitude])
-    @post.location = Location.new(post_params[:location_attributes])
+    @post.location = Location.where(longitude: post_params[:location_attributes][:longitude], latitude: post_params[:location_attributes][:latitude]).first_or_create(post_params[:location_attributes])
   end
 
   def create_photo

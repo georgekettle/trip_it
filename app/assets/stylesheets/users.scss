@@ -1,0 +1,52 @@
+.users_photo_navbar_container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+
+  .users-photo-navbar {
+    width: 50%;
+    background: black;
+    height: 100%;
+    border-radius: 0px 30px 30px 0px;
+    padding: 30px 45px;
+    flex-grow: 1;
+    background-image: url(/assets/landing_page.jpeg);
+    background-position: center;
+    background-size: cover;
+
+    #logo {
+      color: white;
+      text-shadow: 0px 1px 40px rgba(0, 0, 0, 0.8);
+    }
+  }
+
+  .users-content {
+    flex-grow: 1;
+    flex-shrink: 0;
+    padding: 50px;
+    padding-bottom: 100px;
+    width: 450px;
+    max-width: 450px;
+
+    .devise-alt-option {
+      display: block;
+      text-align: center;
+    }
+  }
+}
+
+#registrations-page .users-photo-navbar {
+  background-image: url(/assets/signup.jpeg);
+  background-position: left;
+}
+
+#sessions-page .users-photo-navbar {
+  background-image: url(/assets/login.jpeg);
+}
+
+#passwords-page .users-photo-navbar {
+  background-image: url(/assets/passwords.jpeg);
+  background-position-x: 35%;
+}

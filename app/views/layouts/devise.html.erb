@@ -19,8 +19,12 @@
   </head>
 
   <body>
-    <%= render :partial => 'components/users_photo_navbar' %>
-    <%= yield %>
-    <%= render :partial => 'components/alert' %>
+    <div class="users_photo_navbar_container" id="<%= controller.controller_name %>-page">
+      <%= render partial: 'components/users_photo_navbar' %>
+      <div class="users-content">
+        <%= yield %>
+      </div>
+    </div>
+    <%= render partial: 'components/alert' %>
   </body>
 </html>

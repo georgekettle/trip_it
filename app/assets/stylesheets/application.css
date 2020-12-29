@@ -59,26 +59,11 @@ a:hover {
   opacity: 0.5;
 }
 
-input {
-  font-family: GT Walsheim Pro;
-  font-weight: 400;
-  background-color: #ececec;
-  border: none;
-  padding: 10px;
-  border-radius: 10px;
-}
-
-input[type=submit] {
-  background-color: black;
-  color: white;
-  padding: 10px 15px;
-}
-
-select {
-  padding: 10px;
-  border-radius: 10px;
-  background: #ececec;
-  border: none;
+hr {
+  width: 100%;
+  border: 1px solid #ececec;
+  height: 0px;
+  margin: 10px 0px;
 }
 
 .button-sml {
@@ -104,6 +89,26 @@ select {
 .button-color {
   background: black;
   color: white;
+}
+
+.font-sml {
+  font-size: 12px;
+}
+
+.font-sml-med {
+  font-size: 14px;
+}
+
+.font-med {
+  font-size: 16px;
+}
+
+.font-med-lrg {
+  font-size: 20px;
+}
+
+.font-lrg {
+  font-size: 24px;
 }
 
 .page-container {

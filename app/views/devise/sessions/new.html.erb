@@ -6,15 +6,15 @@
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
   </div>
 
-  <div class="field">
+  <div class="field" style="margin-bottom: 15px">
     <%= f.label :password %><br />
     <%= f.password_field :password, autocomplete: "current-password" %>
   </div>
 
   <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+    <div class="field display-none">
+      <%= f.check_box :remember_me, class: "checkbox" %>
+      <%= f.label :remember_me, style: "display: none" %>
     </div>
   <% end %>
 

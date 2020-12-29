@@ -50,7 +50,6 @@ class PostsController < ApplicationController
   end
 private
   def create_location
-    byebug
     Location.where(longitude: post_params[:location_attributes][:longitude], latitude: post_params[:location_attributes][:latitude])
     @post.location = Location.new(post_params[:location_attributes])
   end

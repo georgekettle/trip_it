@@ -5,14 +5,14 @@ class SearchController < ApplicationController
     @locations = get_locations
     @posts = get_paginated_results(@locations)
     # posts_by_location = @posts.group_by(&:location)
-    @features = get_features(@locations)
+    @features = format_features
     # @locations = posts_by_location.each_with_object({}) { |(k, v), location| location[k.id] = v }
   end
 
   private
 
   def get_paginated_results(locations)
-    Post.where(location: locations.to_a).sort_by(&:photo_popularity).first(20)
+    Post.where(location: locations.to_a).sort_by(&:photo_popularity).paginate(page: params[:page], per_page: 20)
   end
 
   def set_coordinates
@@ -25,11 +25,13 @@ class SearchController < ApplicationController
     return Location.near(@lat_lng, radius, units: :km)
   end
 
-  def get_features(locations)
-    locations.first(20).map{|loc|
+  # base this on posts (not locations)
+  def format_features
+    grouped_by_location = @posts.group_by{|post| post.location}
+    locations = grouped_by_location.keys
+    locations.map do |loc|
       location_hash = loc.attributes
-      location_posts = @posts.select { |post| post.location_id == loc.id }
-      location_hash[:posts] = location_posts.map{|p| p.as_json(include: :photo)}
+      location_hash[:posts] = grouped_by_location[loc].as_json(include: :photo)
 
       feature = {
         type: "Feature",
@@ -39,6 +41,6 @@ class SearchController < ApplicationController
         },
         properties: location_hash
       }
-    }
+    end
   end
 end

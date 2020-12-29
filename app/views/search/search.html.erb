@@ -2,6 +2,7 @@
   <div class="search-page-results">
     <h3><%= @posts.count %> results found</h3>
     <!-- results go here -->
+    <%= will_paginate @posts %>
     <% @posts.each do |post| %>
       <%= render 'posts/post', post: post %>
     <% end %>

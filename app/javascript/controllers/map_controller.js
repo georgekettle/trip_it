@@ -163,7 +163,7 @@ export default class extends Controller {
 
       new mapboxgl.Popup()
         .setLngLat(coordinates)
-        .setHTML(`<div style="height: 200px;width: 200px"><img src=${posts[0]["photo"]["url"]} alt=${posts[0]["title"]} width="200" height="200" style="object-fit: cover;"/></div>`)
+        .setHTML(`<div style="height: 200px;width: 200px" class="mapbox-popup-photo"><img src=${posts[0]["photo"]["url"]} alt=${posts[0]["title"]} width="200" height="200" style="object-fit: cover;"/></div>`)
         .addTo(map);
     });
 

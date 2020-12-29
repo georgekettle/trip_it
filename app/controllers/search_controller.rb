@@ -1,5 +1,7 @@
 class SearchController < ApplicationController
   skip_before_action :authenticate_user!
+  layout 'map'
+
   def search
     set_coordinates
     @locations = get_locations

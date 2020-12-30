@@ -1,4 +1,8 @@
 <div id="post-<%= post.id %>" class="post-card" data-post="<%= post.id %>" data-location="<%= post.location.id %>">
-  <%= image_tag post.photo.url, style: 'width:400px;' %>
-  <p><%= post.title %></p>
+
+  <%= cl_image_tag("#{ENV['CLOUDINARY_600']}/#{post.photo.cloudinary_id}") %>
+  <div class="post-info">
+    <h5 class="title"><%= post.title %></h5>
+    <%= render 'components/location_link', location: post.location %>
+  </div>
 </div>

@@ -1,6 +1,6 @@
 class SearchController < ApplicationController
   skip_before_action :authenticate_user!
-  layout 'map'
+  layout 'map_layout'
 
   def search
     set_coordinates
@@ -14,7 +14,7 @@ class SearchController < ApplicationController
   private
 
   def get_paginated_results(locations)
-    Post.where(location: locations.to_a).sort_by(&:photo_popularity).paginate(page: params[:page], per_page: 20)
+    Post.where(location: locations.to_a).sort_by(&:photo_popularity).paginate(page: params[:page], per_page: 5)
   end
 
   def set_coordinates
@@ -23,7 +23,7 @@ class SearchController < ApplicationController
   end
 
   def get_locations
-    radius = 20
+    radius = 50
     return Location.near(@lat_lng, radius, units: :km)
   end
 

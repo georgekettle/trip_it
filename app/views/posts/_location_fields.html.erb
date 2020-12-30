@@ -1,5 +1,9 @@
 <div class="nested-fields">
   <div>
+      <%= form.label :title %>
+      <%= form.text_field :title, id: 'title' %>
+  </div>
+  <div>
       <%= form.label :address %>
       <%= form.text_field :address, id: 'address' %>
   </div>
@@ -16,6 +20,7 @@
       var longitudeField = document.getElementById('longitude');
       var latitudeField = document.getElementById('latitude');
       var addressField = document.getElementById('address');
+      var titleField = document.getElementById('title');
 
       mapboxgl.accessToken = "<%= ENV['MAPBOX_TOKEN'] %>";
       var map = new mapboxgl.Map({
@@ -26,10 +31,11 @@
       });
 
       // location form fields
-      function setLocationFields(lng, lat, address) {
+      function setLocationFields(lng, lat, address, title) {
         longitudeField.value = lng;
         latitudeField.value = lat;
         addressField.value = address;
+        titleField.value = title;
       };
 
       // marker
@@ -51,7 +57,7 @@
       geocoder.on('result', function(e) {
         console.log(e.result);
         marker.setLngLat(e.result.center).addTo(map);
-        setLocationFields(...e.result.center, e.result.place_name);
+        setLocationFields(...e.result.center, e.result.place_name, e.result.text);
         geocoder.clear();
       });
 

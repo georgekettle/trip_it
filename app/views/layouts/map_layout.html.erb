@@ -16,18 +16,43 @@
     <!-- Promise polyfill script required to use Mapbox GL Geocoder in IE 11 -->
     <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
+
+    <!-- MASONY LAYOUT FOR PHOTO GRID -->
+    <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+    <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
   </head>
 
   <body>
     <div class="map-layout-container">
       <div class="map-layout-content">
         <%= render partial: 'components/navbar' %>
-        <div class="map-layout-yield">
-          <%= yield %>
+        <div class="content-scroll">
+          <div class="map-layout-yield">
+            <%= yield %>
+          </div>
         </div>
       </div>
       <div id="map" class="side-map-sticky" data-controller="map" data-mapbox-token="<%= ENV['MAPBOX_TOKEN'] %>" data-center="<%= @lng_lat %>" data-posts="<%= @posts.to_json(include: [:photo, :location]) %>" data-features="<%= @features.to_json %>"></div>
     </div>
     <%= render partial: 'components/alert' %>
+
+    <!-- masonry script -->
+    <script>
+      var grid = document.querySelector('.grid');
+
+      // layout Masonry after each image loads
+      imagesLoaded( grid, function() {
+        console.log("photos loaded");
+        var msnry = new Masonry( grid, {
+          // options...
+          itemSelector: '.grid-item',
+          itemSelector: '.grid-item',
+          percentPosition: true
+        });
+      })
+      // grid.imagesLoaded().progress( function() {
+      //   grid.masonry('layout');
+      // });
+    </script>
   </body>
 </html>

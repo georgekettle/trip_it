@@ -142,6 +142,11 @@ hr {
   justify-content: space-between;
 }
 
+.flex-align-center {
+  display: flex;
+  align-items: center;
+}
+
 .flex-direction-column {
   flex-direction: column;
 }

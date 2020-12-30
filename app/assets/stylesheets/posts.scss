@@ -2,15 +2,55 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
 .post-card {
+  img {
+    width: 100%;
+    border-radius: 15px;
+  }
 
+  .post-info {
+    padding-left: 3px;
+
+    .title {
+      margin: 0px;
+      margin-bottom: 3px;
+    }
+
+    .location-info {
+      opacity: 0.5;
+
+      .location-title {
+        margin: 0px;
+        margin-left: 3px;
+      }
+    }
+  }
 }
 
 .post-card.active {
-    border: 3px solid red
+    // border: 3px solid red
   }
 
 .post-card {
   &:hover {
-    border: 3px solid red
+    // border: 3px solid red
   }
 }
+
+.grid {
+  margin: -5px;
+
+  .grid-item {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: calc(100% / 3);
+    padding: 5px;
+    padding-bottom: 15px;
+    border-radius: 18px;
+
+    &:hover {
+      background-color: #f3f3f3;
+    }
+  }
+}
+

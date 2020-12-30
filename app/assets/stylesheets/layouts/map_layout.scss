@@ -17,9 +17,15 @@
     overflow: hidden;
     position: relative;
 
-    .map-layout-yield {
-      padding: 30px;
-      padding-top: 70px;
+    .content-scroll {
+      position: relative;
+      overflow: scroll;
+      height: 100%;
+
+      .map-layout-yield {
+        padding: 30px;
+        padding-top: 70px;
+      }
     }
   }
 }

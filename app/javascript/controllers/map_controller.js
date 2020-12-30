@@ -21,43 +21,6 @@ export default class extends Controller {
       zoom: 9
     });
 
-    // console.log(this.features);
-
-    // this.addMarkers(map);
-
-    // JSON.parse(this.posts).forEach(post => {
-    //   var location = post.location;
-    //   var el = document.createElement('div');
-    //   el.className = 'marker';
-
-    //   var postCards = Array.from(document.querySelectorAll(`[data-location="${location.id}"]`));
-    //   console.log(postCards);
-
-    //   el.addEventListener('mouseenter', (e) => {
-    //     // add class to each of the associated posts
-    //     postCards.forEach(post => post.classList.add('active'));
-    //   });
-    //   el.addEventListener('mouseleave', (e) => {
-    //     // add class to each of the associated posts
-    //     postCards.forEach(post => post.classList.remove('active'));
-    //   });
-
-    //   // add onclick event to show image preview
-    //   postCards.forEach(postCard => {
-    //     postCard.addEventListener('mouseenter', (e) => {
-    //       el.classList.add('active');
-    //     });
-    //     postCard.addEventListener('mouseleave', (e) => {
-    //       el.classList.remove('active');
-    //     })
-    //   });
-
-    //   // make a marker for each feature and add to the map
-    //   var marker = new mapboxgl.Marker(el)
-    //     .setLngLat([location.longitude, location.latitude])
-    //     .addTo(map);
-    // })
-
     console.log(geojson);
     map.on('load', function () {
     // Add a new source from our GeoJSON data and
@@ -84,7 +47,7 @@ export default class extends Controller {
       //   * Blue, 20px circles when point count is less than 100
       //   * Yellow, 30px circles when point count is between 100 and 750
       //   * Pink, 40px circles when point count is greater than or equal to 750
-      'circle-color': ['step',['get', 'point_count'],'red',100,'red'],
+      'circle-color': ['step',['get', 'point_count'],'#FF6941',100,'#FF6941'],
       'circle-radius': ['step',['get', 'point_count'],15,15,20]
     }
     });
@@ -110,7 +73,7 @@ export default class extends Controller {
       source: 'locations',
       filter: ['!', ['has', 'point_count']],
       paint: {
-        'circle-color': 'red',
+        'circle-color': '#FF6941',
         'circle-radius': 5,
         'circle-stroke-width': 1,
         'circle-stroke-color': '#fff'

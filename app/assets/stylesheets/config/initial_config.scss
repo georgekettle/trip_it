@@ -1,0 +1,155 @@
+body {
+  font-family: GT Walsheim Pro;
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+  color: $black;
+}
+
+div {
+  box-sizing: border-box;
+}
+
+h1, h2, h3 {
+  font-family: GT Walsheim Pro;
+  font-weight: 500;
+  color: $black;
+  margin: 0px;
+  margin-bottom: 30px;
+}
+
+h4, h5, h6 {
+  font-family: GT Walsheim Pro;
+  font-weight: 400;
+  color: $black;
+  margin: 0px;
+  margin-bottom: 10px;
+}
+
+a {
+  text-decoration: none;
+  color: $black;
+  opacity: 1;
+  transition: ease 0.2s
+}
+
+a:hover {
+  opacity: 0.5;
+}
+
+hr {
+  width: 100%;
+  border: 1px solid #ececec;
+  height: 0px;
+  margin: 10px 0px;
+}
+
+.button-sml {
+  padding: 5px 10px;
+  border-radius: 12px;
+  border: 1px solid $black;
+  font-size: 15px;
+}
+
+.button-med {
+  padding: 10px 15px;
+  border-radius: 15px;
+  border: 1px solid $black;
+}
+
+.button-lrg {
+  padding: 12px 20px;
+  border-radius: 20px;
+  border: 1px solid $black;
+  font-size: 20px;
+}
+
+.button-color {
+  background: $black;
+  color: white;
+}
+
+.font-sml {
+  font-size: 12px;
+}
+
+.font-sml-med {
+  font-size: 14px;
+}
+
+.font-med {
+  font-size: 16px;
+}
+
+.font-med-lrg {
+  font-size: 20px;
+}
+
+.font-lrg {
+  font-size: 24px;
+}
+
+.page-container {
+  width: 100vw;
+  height: 100vh;
+  padding: 20px;
+  padding-bottom: 10%;
+}
+
+.page-content {
+  padding-top: 70px;
+}
+
+.display-none {
+  display: none
+}
+
+.text-center {
+  text-align: center
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center
+}
+
+.flex-space-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.flex-align-center {
+  display: flex;
+  align-items: center;
+}
+
+.flex-direction-column {
+  flex-direction: column;
+}
+
+/*// FONTS*/
+@font-face {
+  font-family: "GT Walsheim Pro";
+  src: asset-url('GT-Walsheim-Pro-Regular.woff2') format("woff2");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "GT Walsheim Pro";
+  src: asset-url('GT-Walsheim-Pro-Medium.woff2') format("woff2");
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "GT Walsheim Pro";
+  src: asset-url('GT-Walsheim-Pro-Bold.woff2') format("woff2");
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: "GT Walsheim Pro";
+  src: asset-url('GT-Walsheim-Pro-Black.woff2') format("woff2");
+  font-weight: 800;
+}

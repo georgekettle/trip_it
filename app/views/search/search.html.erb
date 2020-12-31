@@ -1,19 +1,9 @@
 <div class="search-page-results">
   <div class="search-sub-navbar">
     <div class="search-info">
-      <h3><%= @posts.total_entries %> results found</h3>
-      <!-- <div class="search-info-query">
-        <%= render 'icons/pin', color: "#909090", size: 15 %>
-        <% if params[:search_query] %>
-          <h4>Search: '<%= params[:search_query] %>'</h4>
-        <% else %>
-          <h4>lat: <%= params[:lat] %>, lng: <%= params[:lng] %></h4>
-        <% end %>
-      </div> -->
-
+      <h3 class="font-lrg">Places near <%= params[:name] %></h3>
+      <h4><%= @posts.total_entries %> results found</h4>
     </div>
-    <!-- results go here -->
-    <%= will_paginate @posts, :previous_label => '<', :next_label => '>' %>
   </div>
 
   <div class="grid" data-masonry='{ "itemSelector": ".grid-item", "percentageWidth": true }'>
@@ -23,4 +13,6 @@
       </div>
     <% end %>
   </div>
+
+  <%= render 'components/pagination', items: @posts %>
 </div>

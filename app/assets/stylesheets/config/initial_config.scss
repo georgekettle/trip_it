@@ -37,6 +37,10 @@ a:hover {
   opacity: 0.5;
 }
 
+a.no-highlight:hover {
+  opacity: 1
+}
+
 hr {
   width: 100%;
   border: 1px solid #ececec;

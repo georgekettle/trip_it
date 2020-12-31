@@ -1,4 +1,6 @@
-<div class="flex-align-center location-info">
-  <%= render 'icons/pin', size: 10, color: "black" %>
-  <h6 class="location-title"><%= location.title %></h6>
-</div>
+<%= link_to "/search/#{location.longitude}/#{location.latitude}" do %>
+  <div class="flex-align-center location-info">
+    <%= render 'icons/pin', size: 10 %>
+    <h6 class="location-title"><%= location.title %></h6>
+  </div>
+<% end %>

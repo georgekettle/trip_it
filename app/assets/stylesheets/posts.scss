@@ -16,11 +16,10 @@
     }
 
     .location-info {
-      opacity: 0.5;
-
       .location-title {
         margin: 0px;
         margin-left: 3px;
+        color: $primary;
       }
     }
   }
@@ -30,9 +29,10 @@
     // border: 3px solid red
   }
 
+
 .post-card {
   &:hover {
-    // border: 3px solid red
+    opacity: 1
   }
 }
 

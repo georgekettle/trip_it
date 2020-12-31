@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_30_024108) do
+ActiveRecord::Schema.define(version: 2020_12_31_011431) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,6 +56,7 @@ ActiveRecord::Schema.define(version: 2020_12_30_024108) do
     t.bigint "board_id", null: false
     t.bigint "photo_id", null: false
     t.bigint "location_id", null: false
+    t.string "url"
     t.index ["board_id"], name: "index_posts_on_board_id"
     t.index ["location_id"], name: "index_posts_on_location_id"
     t.index ["photo_id"], name: "index_posts_on_photo_id"

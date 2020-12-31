@@ -1,0 +1,12 @@
+.url-link {
+  display: inline-flex;
+  align-items: center;
+  background-color: $black2;
+  padding: 5px 8px;
+  border-radius: 30px;
+
+  p {
+    margin: 0px;
+    margin-left: 8px;
+  }
+}

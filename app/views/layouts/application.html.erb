@@ -19,8 +19,8 @@
   </head>
 
   <body>
-    <%= render :partial => 'components/users_photo_navbar' %>
+    <%= render 'components/navbar', absolute: false %>
     <%= yield %>
-    <%= render :partial => 'components/alert' %>
+    <%= render 'components/alert' %>
   </body>
 </html>

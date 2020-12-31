@@ -25,7 +25,7 @@
   <body>
     <div class="map-layout-container">
       <div class="map-layout-content">
-        <%= render partial: 'components/navbar' %>
+        <%= render 'components/navbar', absolute: true %>
         <div class="content-scroll">
           <div class="map-layout-yield">
             <%= yield %>
@@ -34,7 +34,7 @@
       </div>
       <div id="map" class="side-map-sticky" data-controller="map" data-mapbox-token="<%= ENV['MAPBOX_TOKEN'] %>" data-center="<%= @lng_lat %>" data-posts="<%= @posts.to_json(include: [:photo, :location]) %>" data-features="<%= @features.to_json %>"></div>
     </div>
-    <%= render partial: 'components/alert' %>
+    <%= render 'components/alert' %>
 
     <!-- masonry script -->
     <script>

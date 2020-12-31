@@ -1,4 +1,8 @@
-<div class="navbar flex-space-between">
+<% if absolute %>
+  <div class="navbar absolute flex-space-between">
+<% else %>
+  <div class="navbar sticky flex-space-between">
+<% end %>
   <%= render partial: 'components/logo' %>
   <div class="navbar-right">
     <% if current_user %>

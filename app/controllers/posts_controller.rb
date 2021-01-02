@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:show]
-  before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :set_post, only: [:show, :edit, :update, :destroy, :save, :new_save]
 
   def show
   end
@@ -49,7 +49,28 @@ class PostsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def new_save
+  end
+
+  def save
+    @post = @post.dup unless @post.user == current_user
+    @post.user = current_user
+    respond_to do |format|
+      if @post.update(post_params)
+        format.html { redirect_to @post, notice: "Post saved to '#{@post.board.title.capitalize}'." }
+        format.json { render :show, status: :ok, location: @post }
+        format.js
+      else
+        format.html { render :new_save }
+        format.json { render json: @post.errors, status: :unprocessable_entity }
+        format.js
+      end
+    end
+  end
+
 private
+
   def create_location
     @post.location = Location.where(longitude: post_params[:location_attributes][:longitude], latitude: post_params[:location_attributes][:latitude]).first_or_create(post_params[:location_attributes])
   end

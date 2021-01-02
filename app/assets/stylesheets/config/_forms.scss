@@ -1,5 +1,6 @@
 form {
   max-width: 400px;
+  margin: 0px auto;
   margin-bottom: 15px;
 
   .field {
@@ -38,8 +39,15 @@ input[type=submit] {
   background-color: $primary;
   color: white;
   padding: 12px 15px;
+  margin-top: 10px;
   width: 100%;
   font-weight: 700;
+}
+
+input[type=submit]:disabled,
+button:disabled {
+  background-color: $black5;
+  color: $black30;
 }
 
 select {
@@ -55,11 +63,6 @@ textarea:focus,
 button:focus {
     outline: none;
 }
-
-// Chckbox
-// label {
-//   display: inline;
-// }
 
 .checkbox {
   display: none;

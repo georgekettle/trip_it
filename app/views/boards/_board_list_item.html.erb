@@ -1,0 +1,25 @@
+<% is_create_new ||= false %>
+
+<% if is_create_new %>
+  <div class="board-list-item">
+    <div class="board-photo-container">
+      <%= render 'icons/plus' %>
+    </div>
+    <div class="flex-space-between" style="flex-grow: 1; padding-right: 10px">
+      <h4>Create board</h4>
+    </div>
+  </div>
+<% else %>
+  <div class="board-list-item">
+    <div class="board-photo-container">
+      <%= cl_image_tag(board.photos.first.cloudinary_id, :version=>"1609296672", :cloud_name=>"dur0bga45", :secure=>"true", :alt=>"#{board.title}", :width=>600, :height=>600, :crop=>"fill") unless board.photos.empty? %>
+    </div>
+    <div class="flex-space-between" style="flex-grow: 1; padding-right: 10px">
+      <h4><%= board.title %></h4>
+      <!-- show depending on active -->
+      <%= render 'icons/circle_check', color: "#FF6941", size: 25, stroke_width: 1.5 %>
+      <%= render 'icons/circle', color: "black", size: 25, stroke_width: 1.5 %>
+    </div>
+  </div>
+<% end %>
+

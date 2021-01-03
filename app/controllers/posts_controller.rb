@@ -21,7 +21,7 @@ class PostsController < ApplicationController
         format.html { redirect_to @post, success: 'Post was successfully created.' }
         format.json { render :show, status: :created, location: @post }
       else
-        format.html { render :new }
+        format.html { render :new, alert: "Oops! There was an error saving the post" }
         format.json { render json: @post.errors, status: :unprocessable_entity }
         format.js
       end
@@ -62,7 +62,7 @@ class PostsController < ApplicationController
         format.json { render :show, status: :ok, location: @post }
         format.js
       else
-        format.html { render :new_save }
+        format.html { render :new_save, alert: "Oops! There was an error saving the post" }
         format.json { render json: @post.errors, status: :unprocessable_entity }
         format.js
       end

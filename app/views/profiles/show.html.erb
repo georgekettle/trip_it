@@ -1,10 +1,8 @@
-<h1><%= @user.email %></h1>
 
-<% @user.boards.each do |board| %>
-  <%= link_to board_path(board) do %>
-    <div class="board-card">
-      <div class="board-card-photos"></div>
-      <h4><%= board.title %></h4>
-    </div>
+<%= render 'components/page_header', header: "#{@user.email}", back: true %>
+
+<div class="boards">
+  <% @user.boards.each do |board| %>
+    <%= render 'boards/board', board: board %>
   <% end %>
-<% end %>
+</div>

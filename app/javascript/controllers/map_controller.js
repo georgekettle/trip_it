@@ -3,7 +3,8 @@ import { Controller } from 'stimulus';
 export default class extends Controller {
   connect() {
     this.posts = this.element.dataset.posts;
-    this.coords = JSON.parse(this.element.dataset.center);
+    this.bbox = JSON.parse(this.element.dataset.bbox);
+    this.center = this.calculateCenter(this.bbox);
     this.mapboxToken = this.element.dataset.mapboxToken;
     this.geojson = {
       "type": "FeatureCollection",
@@ -12,13 +13,24 @@ export default class extends Controller {
     this.initMap(this.geojson);
   }
 
+  calculateCenter(bbox) {
+    let lng = (bbox[0][0] + bbox[1][0]) / 2;
+    let lat = (bbox[0][1] + bbox[1][1]) / 2;
+    return [lng, lat]
+  }
+
   initMap(geojson) {
     mapboxgl.accessToken = this.mapboxToken;
     var map = new mapboxgl.Map({
       container: 'map',
       style: 'mapbox://styles/mapbox/streets-v11',
-      center: this.coords,
-      zoom: 9
+      center: this.center,
+      zoom: 4
+    });
+
+    map.fitBounds(this.bbox, {
+      padding: {top: 60, bottom:60, left: 60, right: 30},
+      maxZoom: 13
     });
 
     console.log(geojson);

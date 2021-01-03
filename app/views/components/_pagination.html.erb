@@ -1,6 +1,6 @@
 <div class="pagination-styler">
   <% if items.previous_page %>
-    <%= link_to search_path(name: params[:name], page: items.previous_page), style: "aria-label: previous;" do %>
+    <%= link_to "#{path}/?page=#{items.previous_page}", style: "aria-label: previous;" do %>
       <%= render 'icons/chevron', color: "black", left: true %>
     <% end %>
   <% else %>
@@ -14,14 +14,14 @@
     <% if page == items.current_page %>
       <div class="active-page"><%= page %></div>
     <% else %>
-      <%= link_to page, search_path(name: params[:name], page: page) %>
+      <%= link_to page, "#{path}/?page=#{page}" %>
     <% end %>
 <!--   Page <%= items.current_page %> of <%= items.total_pages %> -->
   <% end %>
 
 
   <% if items.next_page %>
-    <%= link_to search_path(name: params[:name], page: items.next_page), "aria-label" => "next" do %>
+    <%= link_to "#{path}/?page=#{items.next_page}", "aria-label" => "next" do %>
       <%= render 'icons/chevron', color: "black", left: false %>
     <% end %>
   <% else %>

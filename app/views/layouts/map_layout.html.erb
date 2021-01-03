@@ -32,7 +32,7 @@
           </div>
         </div>
       </div>
-      <div id="map" class="side-map-sticky" data-controller="map" data-mapbox-token="<%= ENV['MAPBOX_TOKEN'] %>" data-center="<%= @lng_lat %>" data-posts="<%= @posts.to_json(include: [:photo, :location]) %>" data-features="<%= @features.to_json %>"></div>
+      <div id="map" class="side-map-sticky" data-controller="map" data-mapbox-token="<%= ENV['MAPBOX_TOKEN'] %>" data-bbox="<%= @bbox %>" data-posts="<%= @posts.to_json(include: [:photo, :location]) %>" data-features="<%= @features.to_json %>"></div>
     </div>
     <%= render 'components/alert' %>
 

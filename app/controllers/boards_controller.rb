@@ -1,7 +1,16 @@
 class BoardsController < ApplicationController
+  include MapboxDataFormatter
   before_action :set_board, only: [:show, :edit, :update, :destroy]
+  layout 'map_layout', only: [:show]
+
   def index
     @boards = current_user.boards
+  end
+
+  def show
+    @posts = @board.posts.paginate(page: params[:page], per_page: 5)
+    @features = MapboxDataFormatter.format_features(@posts)
+    @bbox = MapboxDataFormatter.set_bbox(@features)
   end
 
   def new

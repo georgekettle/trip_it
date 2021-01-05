@@ -1,0 +1,31 @@
+.map-layout-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+
+  .map-layout-content {
+    width: 50%;
+    background: white;
+    height: 100%;
+    border-radius: 0px 30px 30px 0px;
+    flex-grow: 1;
+    margin-right: -30px;
+    z-index: 1;
+    box-shadow: 2px 0px 30px rgba(0,0,0,0.1);
+    overflow: hidden;
+    position: relative;
+
+    .content-scroll {
+      position: relative;
+      overflow: scroll;
+      height: 100%;
+
+      .map-layout-yield {
+        padding: 30px;
+        padding-top: 70px;
+      }
+    }
+  }
+}

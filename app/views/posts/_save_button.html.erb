@@ -1,0 +1,11 @@
+<% if post.user == current_user %>
+  <%= link_to new_save_path(post), class: "save-button saved" do %>
+    <%= render 'icons/bookmark', stroke_width: 1.5, size: 22, color: "#FF6941", fill_color: "#FF6941" %>
+    <h4>Saved</h4>
+  <% end %>
+<% else %>
+  <%= link_to new_save_path(post), class: "save-button" do %>
+    <%= render 'icons/bookmark', stroke_width: 1.5, size: 22, color: "white" %>
+    <h4>Save</h4>
+  <% end %>
+<% end %>

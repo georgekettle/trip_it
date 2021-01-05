@@ -1,16 +1,18 @@
-<a href="#" onclick="history.back()">Go Back</a>
-<h1><%= @board.title %></h1>
-<% @board.users.each do |user| %>
+<%= render 'components/page_header', header: "#{@board.title.capitalize}", back: true, padding_horizontal: '0px' %>
+<!-- <% @board.users.each do |user| %>
   <%= link_to "#{user.email}", profile_path(user.id) %>
 <% end %>
 
 <%= link_to "Edit", edit_board_path(@board) %>
-<%= link_to "Destroy", board_path(@board), :method => :delete %>
+<%= link_to "Destroy", board_path(@board), :method => :delete %> -->
 
-<div>
-  <% @board.posts.each do |post| %>
-    <%= link_to post_path(post) do %>
+<div class="grid" data-masonry='{ "itemSelector": ".grid-item", "percentageWidth": true }'>
+  <% @posts.each do |post| %>
+    <div class="grid-item">
       <%= render 'posts/post', post: post %>
-    <% end %>
+    </div>
   <% end %>
 </div>
+
+<%= render 'components/pagination', items: @posts %>
+

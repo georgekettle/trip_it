@@ -1,4 +1,4 @@
-<%= form_with(model: post, local: true) do |form| %>
+<%= form_with(model: post, local: true, class: 'post-form') do |form| %>
   <% if post.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
@@ -11,34 +11,40 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title %>
+  <div class="col-half">
+    <div class="upload-container" data-controller="image-uploader" data-action="click->image-uploader#openImageSelect">
+      <%= form.fields_for :photo do |photo_form| %>
+        <%= render 'components/image_uploader', form: photo_form %>
+
+        <%= photo_form.hidden_field :image, as: :file, value: photo_form.object.image.signed_id if photo_form.object.image.attached? %>
+      <%= photo_form.file_field :image, as: :file, class: 'display-none', data: {image_uploader_target: "input", action: "change->image-uploader#updatePreview"} %>
+      <% end %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_field :description %>
+  <div class="col-half">
+    <div class="field">
+      <%= form.label :title %>
+      <%= form.text_field :title %>
+    </div>
+
+    <div class="field">
+      <%= form.label :description %>
+      <%= form.text_field :description %>
+    </div>
+
+    <div class="field">
+      <%= form.label :board %>
+      <%= collection_select(:post, :board_id, current_user.boards, :id, :title, prompt: true) %>
+    </div>
+
+    <%= form.fields_for :location do |location_form| %>
+      <%= render "location_fields", form: location_form %>
+    <% end %>
+
+    <div class="actions">
+      <%= form.submit "Create Post", data: { disable_with: "Please wait..." } %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :board %>
-    <%= collection_select(:post, :board_id, current_user.boards, :id, :title, prompt: true) %>
-  </div>
-
-  <% if post.photo %>
-    <%= render :partial => post.photo, photo: post.photo %>
-    <%= form.number_field :photo_id %>
-<!--     <p>Can't update photo yet... instead create new post</p>-->
-  <% else %>
-    <%= form.file_field :photo %>
-  <% end %>
-
-  <%= form.fields_for :location do |location_form| %>
-    <%= render "location_fields", form: location_form %>
-  <% end %>
-
-  <div class="actions">
-    <%= form.submit "Create Post", data: { disable_with: "Please wait..." } %>
-  </div>
 <% end %>

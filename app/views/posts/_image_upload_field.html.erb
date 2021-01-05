@@ -1,0 +1,10 @@
+<div class="field" data-controller="image-uploader">
+  <%= form.label :photo %>
+  <% if post.photo %>
+    <%= render :partial => post.photo, photo: post.photo %>
+    <%= form.number_field :photo_id, class: 'display-none' %>
+  <% else %>
+    <%= render 'components/image_uploader' %>
+    <%= form.file_field :photo, data: {image_uploader_target:"input", action: "change->image-uploader#updatePreview"} %>
+  <% end %>
+</div>

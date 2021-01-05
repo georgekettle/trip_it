@@ -1,0 +1,101 @@
+form {
+  max-width: 400px;
+  margin: 0px auto;
+  margin-bottom: 15px;
+
+  .field {
+    margin-bottom: 5px;
+
+    label {
+      color: $black;
+      padding-bottom: 5px;
+      font-size: 14px;
+    }
+
+    em {
+      color: $black;
+      padding-bottom: 5px;
+      font-size: 12px;
+      opacity: 0.5;
+    }
+
+    input, select {
+      width: 100%
+    }
+  }
+}
+
+input, select {
+  font-family: GT Walsheim Pro;
+  font-weight: 400;
+  background-color: #ececec;
+  border: none;
+  padding: 10px;
+  border-radius: 10px;
+  box-sizing: border-box;
+  display: block;
+}
+
+input[type=submit] {
+  background-color: $primary;
+  color: white;
+  padding: 12px 15px;
+  margin-top: 10px;
+  width: 100%;
+  font-weight: 700;
+}
+
+input[type=submit]:disabled,
+button:disabled {
+  background-color: $black5;
+  color: $black30;
+}
+
+// select {
+//   padding: 10px;
+//   border-radius: 10px;
+//   background: #ececec;
+//   border: none;
+//   width: 100%;
+// }
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
+}
+
+.checkbox {
+  display: none;
+}
+
+.checkbox + label {
+  background-color: #ececec;
+  padding: 2px;
+  border-radius: 23px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  height: 15px;
+  width: 15px;
+}
+
+.checkbox + label:active, .checkbox:checked + label:active {
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px 1px 3px rgba(0,0,0,0.1);
+}
+
+.checkbox:checked + label {
+  background-color: #ececec;
+}
+
+.checkbox:checked + label:after {
+  content: '';
+  background-color: red;
+  height: 90%;
+  width: 90%;
+  border-radius: 20px;
+}
+
+

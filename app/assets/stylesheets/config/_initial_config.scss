@@ -1,31 +1,9 @@
-/*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
- * vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
- * files in this directory. Styles in this file should be added after the last require_* statement.
- * It is generally better to create a new file per style scope.
- *
- *= require_self
- *= require_tree .
- */
-
-/*-- colors --*/
-/*$primary: black;
-$secondary: gray;
-$black: black;
-$error-red: #ff4b4b;*/
-
 body {
   font-family: GT Walsheim Pro;
   padding: 0px;
   margin: 0px;
   box-sizing: border-box;
-  color: black;
+  color: $black;
 }
 
 div {
@@ -35,75 +13,101 @@ div {
 h1, h2, h3 {
   font-family: GT Walsheim Pro;
   font-weight: 500;
-  color: black;
+  color: $black;
   margin: 0px;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
+  line-height: 0.9em;
 }
 
 h4, h5, h6 {
   font-family: GT Walsheim Pro;
   font-weight: 400;
-  color: black;
+  color: $black;
   margin: 0px;
   margin-bottom: 10px;
 }
 
+p {
+  color: $black30;
+}
+
 a {
   text-decoration: none;
-  color: black;
+  color: $black;
   opacity: 1;
   transition: ease 0.2s
 }
 
 a:hover {
-  opacity: 0.5;
+  opacity: 0.9;
 }
 
-input {
-  font-family: GT Walsheim Pro;
-  font-weight: 400;
-  background-color: #ececec;
-  border: none;
-  padding: 10px;
-  border-radius: 10px;
+a.no-highlight:hover {
+  opacity: 1
 }
 
-input[type=submit] {
-  background-color: black;
-  color: white;
-  padding: 10px 15px;
+hr {
+  width: 100%;
+  border: 1px solid #ececec;
+  height: 0px;
+  margin: 10px 0px;
 }
 
-select {
-  padding: 10px;
-  border-radius: 10px;
-  background: #ececec;
-  border: none;
+ul {
+  padding-inline-start: 0px;
+
+  li {
+    list-style: none
+  }
 }
 
 .button-sml {
   padding: 5px 10px;
   border-radius: 12px;
-  border: 1px solid black;
+  border: 1px solid $black;
   font-size: 15px;
 }
 
 .button-med {
   padding: 10px 15px;
   border-radius: 15px;
-  border: 1px solid black;
+  border: 1px solid $black;
 }
 
 .button-lrg {
   padding: 12px 20px;
   border-radius: 20px;
-  border: 1px solid black;
+  border: 1px solid $black;
   font-size: 20px;
 }
 
 .button-color {
-  background: black;
+  background: $black;
   color: white;
+}
+
+.font-sml {
+  font-size: 12px;
+}
+
+.font-sml-med {
+  font-size: 14px;
+}
+
+.font-med {
+  font-size: 16px;
+}
+
+.font-med-lrg {
+  font-size: 20px;
+}
+
+.font-lrg {
+  font-size: 24px;
+}
+
+.text-center {
+  text-align: center
 }
 
 .page-container {
@@ -118,7 +122,7 @@ select {
 }
 
 .display-none {
-  display: none
+  display: none!important
 }
 
 .text-center {
@@ -135,6 +139,11 @@ select {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.flex-align-center {
+  display: flex;
+  align-items: center;
 }
 
 .flex-direction-column {

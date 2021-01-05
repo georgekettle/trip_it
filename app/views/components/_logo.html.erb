@@ -1,0 +1,15 @@
+<% dark ||= true %>
+<% shadow ||= false %>
+
+<%= link_to root_path do %>
+  <% if dark && shadow %>
+    <h3 id="logo" style="text-shadow: 0px 1px 40px rgba(0, 0, 0, 0.8)">trip.it</h3>
+  <% elsif !dark && !shadow %>
+    <h3 id="logo" style="color: white">trip.it</h3>
+  <% elsif !dark && shadow %>
+    <h3 id="logo" style="text-shadow: 0px 1px 40px rgba(0, 0, 0, 0.8); color: white">trip.it</h3>
+  <% else %>
+    <!-- default with no styling -->
+    <h3 id="logo">trip.it</h3>
+  <% end %>
+<% end %>

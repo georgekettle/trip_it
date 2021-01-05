@@ -15,9 +15,12 @@ export default class extends Controller {
     geocoder.addTo('#geocoder');
 
     geocoder.on('result', function(e) {
+        console.log(e.result);
+        var bbox = e.result.bbox ? e.result.bbox : null;
+        var name = e.result.text ? e.result.text : null;
         var lng = e.result.center[0];
         var lat = e.result.center[1];
-        window.location.href = `${window.location.origin}/search/${lng}/${lat}`;
+        window.location.href = `${window.location.origin}/search/${lng}/${lat}?name=${name}&bbox=${bbox}`;
       });
   }
 }

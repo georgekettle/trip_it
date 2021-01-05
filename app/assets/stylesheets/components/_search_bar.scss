@@ -1,0 +1,51 @@
+#geocoder {
+  z-index: 1;
+  width: 100%;
+  text-align: center;
+  top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 400px;
+
+  .mapboxgl-ctrl-geocoder.mapboxgl-ctrl {
+    width: 100%;
+    border-radius: 14px;
+    max-width: unset;
+    font-size: 16px;
+    background-color: transparent;
+  }
+
+  .mapboxgl-ctrl-geocoder--icon-search {
+    display: none;
+  }
+
+  .mapboxgl-ctrl-geocoder--input {
+    padding: 15px 20px;
+    height: unset;
+    font-family: GT Walsheim Pro;
+    background-color: rgba(255,255,255,0.7);
+  }
+
+  .mapboxgl-ctrl-geocoder--button {
+    background: transparent;
+    top: 13px;
+    right: 13px;
+  }
+
+  .mapboxgl-ctrl-geocoder--suggestion {
+    font-family: GT Walsheim Pro;
+  }
+
+  .mapboxgl-ctrl-geocoder--suggestion-address {
+
+  }
+
+  .suggestions-wrapper {
+    .suggestions {
+      border-radius: 14px;
+    }
+  }
+}
+
+

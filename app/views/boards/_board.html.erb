@@ -1,0 +1,20 @@
+<%= link_to board_path(board), class: 'board-card-wrapper' do %>
+  <div class="board-card">
+      <div class="board-card-photos">
+        <div class="first-photo">
+          <%= cl_image_tag(board.photos.first.image.key, :alt=>"#{board.title}", :width=>600, :height=>600, :crop=>"fill") unless board.photos.empty? %>
+        </div>
+        <div class="second-photos">
+          <div class="first-second-photo">
+            <%= cl_image_tag(board.photos.second.image.key, :alt=>"#{board.title}", :width=>600, :height=>600, :crop=>"fill") if board.photos.second %>
+          </div>
+          <div>
+            <%= cl_image_tag(board.photos.third.image.key, :alt=>"#{board.title}", :width=>600, :height=>600, :crop=>"fill") if board.photos.third %>
+          </div>
+        </div>
+      </div>
+      <h3><%= board.title %></h3>
+      <% post_text = board.posts.count == 1 ? 'post' : 'posts' %>
+      <p><%= board.posts.count %> <%= post_text %></p>
+  </div>
+<% end %>

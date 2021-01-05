@@ -1,0 +1,31 @@
+.page-header {
+  padding: 0px 30px;
+  margin-top: 10px;
+  position: relative;
+  margin-bottom: 30px;
+
+  h1 {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: inline-block;
+    position: absolute;
+    margin: 0px;
+  }
+}
+
+.back-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: $black5;
+  border-radius: 50%;
+  cursor: pointer;
+
+  &:hover {
+    background: $black10;
+    opacity: 1;
+  }
+}

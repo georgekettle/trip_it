@@ -3,7 +3,8 @@ import { Controller } from 'stimulus';
 export default class extends Controller {
   connect() {
     this.posts = this.element.dataset.posts;
-    this.coords = JSON.parse(this.element.dataset.center);
+    this.bbox = JSON.parse(this.element.dataset.bbox);
+    this.center = this.calculateCenter(this.bbox);
     this.mapboxToken = this.element.dataset.mapboxToken;
     this.geojson = {
       "type": "FeatureCollection",
@@ -12,51 +13,25 @@ export default class extends Controller {
     this.initMap(this.geojson);
   }
 
+  calculateCenter(bbox) {
+    let lng = (bbox[0][0] + bbox[1][0]) / 2;
+    let lat = (bbox[0][1] + bbox[1][1]) / 2;
+    return [lng, lat]
+  }
+
   initMap(geojson) {
     mapboxgl.accessToken = this.mapboxToken;
     var map = new mapboxgl.Map({
       container: 'map',
       style: 'mapbox://styles/mapbox/streets-v11',
-      center: this.coords,
-      zoom: 9
+      center: this.center,
+      zoom: 4
     });
 
-    // console.log(this.features);
-
-    // this.addMarkers(map);
-
-    // JSON.parse(this.posts).forEach(post => {
-    //   var location = post.location;
-    //   var el = document.createElement('div');
-    //   el.className = 'marker';
-
-    //   var postCards = Array.from(document.querySelectorAll(`[data-location="${location.id}"]`));
-    //   console.log(postCards);
-
-    //   el.addEventListener('mouseenter', (e) => {
-    //     // add class to each of the associated posts
-    //     postCards.forEach(post => post.classList.add('active'));
-    //   });
-    //   el.addEventListener('mouseleave', (e) => {
-    //     // add class to each of the associated posts
-    //     postCards.forEach(post => post.classList.remove('active'));
-    //   });
-
-    //   // add onclick event to show image preview
-    //   postCards.forEach(postCard => {
-    //     postCard.addEventListener('mouseenter', (e) => {
-    //       el.classList.add('active');
-    //     });
-    //     postCard.addEventListener('mouseleave', (e) => {
-    //       el.classList.remove('active');
-    //     })
-    //   });
-
-    //   // make a marker for each feature and add to the map
-    //   var marker = new mapboxgl.Marker(el)
-    //     .setLngLat([location.longitude, location.latitude])
-    //     .addTo(map);
-    // })
+    map.fitBounds(this.bbox, {
+      padding: {top: 60, bottom:60, left: 60, right: 30},
+      maxZoom: 13
+    });
 
     console.log(geojson);
     map.on('load', function () {
@@ -84,7 +59,7 @@ export default class extends Controller {
       //   * Blue, 20px circles when point count is less than 100
       //   * Yellow, 30px circles when point count is between 100 and 750
       //   * Pink, 40px circles when point count is greater than or equal to 750
-      'circle-color': ['step',['get', 'point_count'],'red',100,'red'],
+      'circle-color': ['step',['get', 'point_count'],'#FF6941',100,'#FF6941'],
       'circle-radius': ['step',['get', 'point_count'],15,15,20]
     }
     });
@@ -110,7 +85,7 @@ export default class extends Controller {
       source: 'locations',
       filter: ['!', ['has', 'point_count']],
       paint: {
-        'circle-color': 'red',
+        'circle-color': '#FF6941',
         'circle-radius': 5,
         'circle-stroke-width': 1,
         'circle-stroke-color': '#fff'
@@ -163,7 +138,7 @@ export default class extends Controller {
 
       new mapboxgl.Popup()
         .setLngLat(coordinates)
-        .setHTML(`<div style="height: 200px;width: 200px"><img src=${posts[0]["photo"]["url"]} alt=${posts[0]["title"]} width="200" height="200" style="object-fit: cover;"/></div>`)
+        .setHTML(`<div style="height: 200px;width: 200px" class="mapbox-popup-photo"><img src=${posts[0]["photo"]["url"]} alt=${posts[0]["title"]} width="200" height="200" style="object-fit: cover;"/></div>`)
         .addTo(map);
     });
 

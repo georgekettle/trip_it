@@ -1,21 +1,26 @@
 <div class="nested-fields">
-  <div>
+  <div class="display-none">
+      <%= form.label :title %>
+      <%= form.text_field :title, id: 'title' %>
+  </div>
+  <div class="display-none">
       <%= form.label :address %>
       <%= form.text_field :address, id: 'address' %>
   </div>
-  <div>
+  <div class="display-none">
       <%= form.label :longitude %>
       <%= form.text_field :longitude, id: 'longitude' %>
   </div>
-  <div>
+  <div class="display-none">
       <%= form.label :latitude %>
       <%= form.text_field :latitude, id: 'latitude' %>
   </div>
-  <div id='select-location' style='width: 400px; height: 300px;'></div>
+  <div id='select-location' style='width: 100%; height: 300px;'></div>
   <script>
       var longitudeField = document.getElementById('longitude');
       var latitudeField = document.getElementById('latitude');
       var addressField = document.getElementById('address');
+      var titleField = document.getElementById('title');
 
       mapboxgl.accessToken = "<%= ENV['MAPBOX_TOKEN'] %>";
       var map = new mapboxgl.Map({
@@ -26,10 +31,11 @@
       });
 
       // location form fields
-      function setLocationFields(lng, lat, address) {
+      function setLocationFields(lng, lat, address, title) {
         longitudeField.value = lng;
         latitudeField.value = lat;
         addressField.value = address;
+        titleField.value = title;
       };
 
       // marker
@@ -51,7 +57,7 @@
       geocoder.on('result', function(e) {
         console.log(e.result);
         marker.setLngLat(e.result.center).addTo(map);
-        setLocationFields(...e.result.center, e.result.place_name);
+        setLocationFields(...e.result.center, e.result.place_name, e.result.text);
         geocoder.clear();
       });
 

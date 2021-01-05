@@ -5,6 +5,8 @@ class Post < ApplicationRecord
   belongs_to :location
 
   accepts_nested_attributes_for :location
+  accepts_nested_attributes_for :board
+  accepts_nested_attributes_for :photo
 
   # validates :location, :photo, presence
   validates :photo, :location, :presence => true

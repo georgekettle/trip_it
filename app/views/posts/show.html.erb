@@ -1,6 +1,6 @@
 <div class="post-show">
   <div class="post-show-photo-and-info">
-    <%= image_tag @post.photo.url, class: "photo" %>
+    <%= cl_image_tag(@post.photo.image.key, class: "photo") if @post.photo.image.attached? %>
     <div class="post-info">
       <%= render 'posts/show_header', post: @post %>
       <% if @post.url %>

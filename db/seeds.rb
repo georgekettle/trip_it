@@ -51,57 +51,55 @@ locations.each do |location|
 end
 p "Finish creating locations"
 
-photos = [
-  {
-    address: "Albany, Western Australia, Australia",
-    url: "https://res.cloudinary.com/dur0bga45/image/upload/v1609133350/seeds/albany.jpg",
-    cloudinary_id: "albany"
-  },
-  {
-    address: "North Cottesloe Beach, Marine Pde, Perth, Western Australia 6011, Australia",
-    url: "https://res.cloudinary.com/dur0bga45/image/upload/v1609133365/seeds/north_cottesloe.jpg",
-    cloudinary_id: "north_cottesloe"
-  },
-  {
-    address: "North Cottesloe Beach, Marine Pde, Perth, Western Australia 6011, Australia",
-    url: "https://res.cloudinary.com/dur0bga45/image/upload/v1609133354/seeds/north_cottesloe_2.jpg",
-    cloudinary_id: "north_cottesloe_2"
-  },
-  {
-    address: "Cottesloe Beach Hotel, 104 Marine Parade, Perth, Western Australia 6011, Australia",
-    url: "https://res.cloudinary.com/dur0bga45/image/upload/v1609133528/seeds/cottesloe.jpg",
-    cloudinary_id: "cottesloe"
-  },
-  {
-    address: "Scarborough Beach, The Esplanade, Perth, Western Australia 6019, Australia",
-    url: "https://res.cloudinary.com/dur0bga45/image/upload/v1609133354/seeds/scarborough_beach.jpg",
-    cloudinary_id: "scarborough_beach"
-  },
-  {
-    address: "Scarborough Beach, The Esplanade, Perth, Western Australia 6019, Australia",
-    url: "https://res.cloudinary.com/dur0bga45/image/upload/v1609134026/seeds/scarborough_2.jpg",
-    cloudinary_id: "scarborough_2"
-  },
-  {
-    address: "Peasholm Street Dog Beach, West Coast Hwy, Perth, Western Australia 6019, Australia",
-    url: "https://res.cloudinary.com/dur0bga45/image/upload/v1609133340/seeds/peasholm.jpg",
-    cloudinary_id: "peasholm"
-  },
-  {
-    address: "Brighton Beach, The Esplanade, Perth, Western Australia 6019, Australia",
-    url: "https://res.cloudinary.com/dur0bga45/image/upload/v1609133337/seeds/brighton_beach.jpg",
-    cloudinary_id: "brighton_beach"
-  },
-]
+# photos = [
+#   {
+#     address: "Albany, Western Australia, Australia",
+#     url: "https://res.cloudinary.com/dur0bga45/image/upload/v1609133350/seeds/albany.jpg",
+#     cloudinary_id: "albany"
+#   },
+#   {
+#     address: "North Cottesloe Beach, Marine Pde, Perth, Western Australia 6011, Australia",
+#     url: "https://res.cloudinary.com/dur0bga45/image/upload/v1609133365/seeds/north_cottesloe.jpg",
+#     cloudinary_id: "north_cottesloe"
+#   },
+#   {
+#     address: "North Cottesloe Beach, Marine Pde, Perth, Western Australia 6011, Australia",
+#     url: "https://res.cloudinary.com/dur0bga45/image/upload/v1609133354/seeds/north_cottesloe_2.jpg",
+#     cloudinary_id: "north_cottesloe_2"
+#   },
+#   {
+#     address: "Cottesloe Beach Hotel, 104 Marine Parade, Perth, Western Australia 6011, Australia",
+#     url: "https://res.cloudinary.com/dur0bga45/image/upload/v1609133528/seeds/cottesloe.jpg",
+#     cloudinary_id: "cottesloe"
+#   },
+#   {
+#     address: "Scarborough Beach, The Esplanade, Perth, Western Australia 6019, Australia",
+#     url: "https://res.cloudinary.com/dur0bga45/image/upload/v1609133354/seeds/scarborough_beach.jpg",
+#     cloudinary_id: "scarborough_beach"
+#   },
+#   {
+#     address: "Scarborough Beach, The Esplanade, Perth, Western Australia 6019, Australia",
+#     url: "https://res.cloudinary.com/dur0bga45/image/upload/v1609134026/seeds/scarborough_2.jpg",
+#     cloudinary_id: "scarborough_2"
+#   },
+#   {
+#     address: "Peasholm Street Dog Beach, West Coast Hwy, Perth, Western Australia 6019, Australia",
+#     url: "https://res.cloudinary.com/dur0bga45/image/upload/v1609133340/seeds/peasholm.jpg",
+#     cloudinary_id: "peasholm"
+#   },
+#   {
+#     address: "Brighton Beach, The Esplanade, Perth, Western Australia 6019, Australia",
+#     url: "https://res.cloudinary.com/dur0bga45/image/upload/v1609133337/seeds/brighton_beach.jpg",
+#     cloudinary_id: "brighton_beach"
+#   },
+# ]
 
-p "Creating photos"
-photos.each do |photo|
-  Photo.create!(
-      url: photo[:url],
-      cloudinary_id: photo[:cloudinary_id]
-    )
-end
-p "Finish creating photos"
+# p "Creating photos"
+#   photos.each do |photo|
+#     new_photo = Photo.create!
+#     new_photo.image.attach(io: File.open('app/assets/images/signup.jpeg'), filename: 'signup.png', content_type: 'image/png')
+#   end
+# p "Finish creating photos"
 
 boards = [
   {
@@ -209,14 +207,16 @@ posts = [
 
 p "Creating posts"
 posts.each do |post|
-  Post.create!(
+  new_post = Post.new(
       title: post[:title],
       description: post[:description],
       user_id: post[:user_id],
       board_id: post[:board_id],
       user_id: post[:user_id],
-      photo_id: post[:photo_id],
       location_id: post[:location_id],
     )
+  new_post.photo = Photo.new
+  new_post.photo.image.attach(io: File.open('app/assets/images/signup.jpeg'), filename: 'signup.png', content_type: 'image/png')
+  new_post.save!
 end
 p "Finish creating posts"

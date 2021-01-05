@@ -1,1 +1,1 @@
-<%= cl_image_tag(photo.url, :width => 150) %>
+<%= cl_image_tag(photo.image.key, :width => 150) if photo.image.attached? %>

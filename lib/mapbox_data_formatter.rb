@@ -23,12 +23,18 @@ module MapboxDataFormatter
   #   [32.958984, -5.353521],
   #   [43.50585, 5.615985]
   # ]
-  def self.set_bbox(features)
-    first_feature = features.first[:geometry][:coordinates]
-    north = first_feature[1]
-    south = first_feature[1]
-    east = first_feature[0]
-    west = first_feature[0]
+  def self.set_bbox(features, center = nil)
+    if center
+      center = center
+    elsif features.first
+      center = features.first[:geometry][:coordinates]
+    else
+      center = [0,0]
+    end
+    north = center[1]
+    south = center[1]
+    east = center[0]
+    west = center[0]
 
     locations = features.map{|f| f[:geometry][:coordinates]}
     locations.each do |loc|

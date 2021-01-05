@@ -1,0 +1,26 @@
+
+<% new_classlist = form.object.image.attached? ? 'new-image display-none' : 'new-image' %>
+<div class="<%= new_classlist %>" data-image-uploader-target="new">
+  <div class="plus-button flex-center"><%= render 'icons/plus', color: 'white' %></div>
+  <h4>Add image</h4>
+</div>
+
+<% preview_classlist = form.object.image.attached? ? 'image-preview-container' : 'image-preview-container display-none' %>
+<div class="<%= preview_classlist %>" data-image-uploader-target="previewContainer">
+  <div class="remove-image flex-center">
+    <%= render 'icons/edit', stroke_width: 1.5 %>
+  </div>
+  <div class="image-preview" data-image-uploader-target="preview">
+    <%= cl_image_tag(form.object.image.key, :width => 400) if form.object.image.attached? %>
+  </div>
+</div>
+
+<%# TO BE USED LIKE SO %>
+<!-- <div class="upload-container" data-controller="image-uploader" data-action="click->image-uploader#openImageSelect"> -->
+  <%#  form.fields_for :photo do |photo_form| %>
+    <%#  render 'components/image_uploader', photo: post.photo, form: photo_form %>
+
+    <%#  photo_form.hidden_field :image, as: :file, value: photo_form.object.image.signed_id if photo_form.object.image.attached? %>
+  <%#  photo_form.file_field :image, as: :file, class: 'display-none', data: {image_uploader_target: "input", action: "change->image-uploader#updatePreview"} %>
+  <%# end %>
+<!-- </div> -->

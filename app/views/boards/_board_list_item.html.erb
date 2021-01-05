@@ -12,7 +12,7 @@
 <% else %>
   <div class="board-list-item">
     <div class="board-photo-container">
-      <%= cl_image_tag(board.photos.first.cloudinary_id, :version=>ENV['CLOUDINARY_VERSION'], :cloud_name=>ENV['CLOUDINARY_NAME'], :secure=>"true", :alt=>"#{board.title}", :width=>600, :height=>600, :crop=>"fill") unless board.photos.empty? %>
+      <%= cl_image_tag(board.photos.first.image.key, :alt=>"#{board.title}", :width=>600, :height=>600, :crop=>"fill") unless board.photos.empty? %>
     </div>
     <div class="flex-space-between" style="flex-grow: 1; padding-right: 10px">
       <h4><%= board.title %></h4>

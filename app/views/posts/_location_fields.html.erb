@@ -1,21 +1,21 @@
 <div class="nested-fields">
-  <div>
+  <div class="display-none">
       <%= form.label :title %>
       <%= form.text_field :title, id: 'title' %>
   </div>
-  <div>
+  <div class="display-none">
       <%= form.label :address %>
       <%= form.text_field :address, id: 'address' %>
   </div>
-  <div>
+  <div class="display-none">
       <%= form.label :longitude %>
       <%= form.text_field :longitude, id: 'longitude' %>
   </div>
-  <div>
+  <div class="display-none">
       <%= form.label :latitude %>
       <%= form.text_field :latitude, id: 'latitude' %>
   </div>
-  <div id='select-location' style='width: 400px; height: 300px;'></div>
+  <div id='select-location' style='width: 100%; height: 300px;'></div>
   <script>
       var longitudeField = document.getElementById('longitude');
       var latitudeField = document.getElementById('latitude');

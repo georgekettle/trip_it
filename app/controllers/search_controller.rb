@@ -7,10 +7,22 @@ class SearchController < ApplicationController
     @locations = get_locations
     @posts = get_paginated_results(@locations)
     @features = MapboxDataFormatter.format_features(@posts)
-    @bbox = @bbox = MapboxDataFormatter.set_bbox(@features)
+    @bbox = set_bbox
   end
 
   private
+
+  def set_bbox
+    if params[:bbox]
+      bbox_arr = params[:bbox].split(/,/).map(&:to_f)
+      return [
+        [bbox_arr[0], bbox_arr[1]],
+        [bbox_arr[2], bbox_arr[3]]
+      ]
+    else
+      return MapboxDataFormatter.set_bbox(@features, @lng_lat)
+    end
+  end
 
   def get_paginated_results(locations)
     Post.where(location: locations.to_a).sort_by(&:photo_popularity).paginate(page: params[:page], per_page: 5)
@@ -22,23 +34,4 @@ class SearchController < ApplicationController
     @lat_lng = [ params[:lat].to_f, params[:lng].to_f ]
     return Location.near(@lat_lng, radius, units: :km)
   end
-
-  # # base this on posts (not locations)
-  # def format_features
-  #   grouped_by_location = @posts.group_by{|post| post.location}
-  #   locations = grouped_by_location.keys
-  #   locations.map do |loc|
-  #     location_hash = loc.attributes
-  #     location_hash[:posts] = grouped_by_location[loc].as_json(include: :photo)
-
-  #     feature = {
-  #       type: "Feature",
-  #       geometry: {
-  #         type: "Point",
-  #         coordinates: [loc.longitude, loc.latitude]
-  #       },
-  #       properties: location_hash
-  #     }
-  #   end
-  # end
 end

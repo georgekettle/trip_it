@@ -3,6 +3,8 @@
   margin-top: 10px;
   position: relative;
   margin-bottom: 30px;
+  display: flex;
+  justify-content: space-between;
 
   h1 {
     top: 50%;
@@ -12,20 +14,26 @@
     position: absolute;
     margin: 0px;
   }
-}
 
-.back-button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  background: $black5;
-  border-radius: 50%;
-  cursor: pointer;
+  .icon-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: $black5;
+    border-radius: 50%;
+    cursor: pointer;
 
-  &:hover {
-    background: $black10;
-    opacity: 1;
+    &:hover {
+      background: $black10;
+      opacity: 1;
+    }
+  }
+
+  .extra-options {
+    .icon-button {
+      margin-left: 10px;
+    }
   }
 }

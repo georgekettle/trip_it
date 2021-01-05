@@ -1,11 +1,10 @@
-<%= render 'components/page_header', header: "", back: true %>
+<% edit = @user == current_user ? edit_user_registration_path(current_user) : nil %>
+<%= render 'components/page_header', header: "", back: true, edit: edit %>
 
 <div class="profile-header flex-center flex-direction-column">
   <%= render('components/avatar', image: @user.avatar, size: 100) %>
   <h1><%= @user.format_username %></h1>
-  <% if @user == current_user %>
-    <%= link_to 'Edit profile', edit_user_registration_path(current_user) %>
-  <% end %>
+  <p><%= @user.description %></p>
 </div>
 
 <div class="boards">

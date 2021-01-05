@@ -1,3 +1,8 @@
 <div class="users-photo-navbar">
-  <%= render partial: 'components/logo', dark: false, shadow: true %>
+  <div class="flex-space-between">
+    <%= render partial: 'components/logo', dark: false, shadow: true %>
+    <% unless current_user %>
+      <%= render 'components/account_dropdown' %>
+    <% end %>
+  </div>
 </div>

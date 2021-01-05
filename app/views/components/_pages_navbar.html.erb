@@ -4,13 +4,8 @@
   <% end %>
   <div class="navbar-right font-sml-med">
     <% if current_user %>
-      <%= link_to "+ Add Post", new_post_path %>
-      <%= link_to "+ Add board", new_board_path %>
-      <%= link_to "My Profile", profile_path(current_user) %>
-      <%= link_to "Logout", destroy_user_session_path, :method => :delete %>
-    <% else %>
-      <%= link_to "Login", new_user_session_path %>
-      <%= link_to "Sign Up", new_user_registration_path %>
+      <%= render 'components/create_dropdown' %>
     <% end %>
+    <%= render 'components/account_dropdown' %>
   </div>
 </div>

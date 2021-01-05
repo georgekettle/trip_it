@@ -12,6 +12,10 @@ module TripIt
     config.load_defaults 6.0
     config.assets.paths << Rails.root.join('/app/assets/icons')
 
+
+    config.to_prepare do
+      Devise::RegistrationsController.layout proc{ |controller| user_signed_in? ? "application" : "devise" }
+    end
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading

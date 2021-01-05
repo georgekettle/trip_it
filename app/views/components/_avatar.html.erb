@@ -1,0 +1,6 @@
+<% size ||= 20 %>
+
+<div class="avatar flex-center" style="width: <%= size %>px; height: <%= size %>px; border: <%= size / 30 %>px solid white; border-radius: <%= size %>px; box-shadow: 0px <%= size / 10 %>px <%= size / 2 %>px rgba(0,0,0,0.1);">
+  <%= render('icons/user', size: (size / 2), stroke_width: 1.5) unless image.attached? %>
+  <%= cl_image_tag(image.key, :width=>600, :height=>600, :crop=>"fill") if image.attached? %>
+</div>

@@ -2,8 +2,11 @@
   <div id="post-<%= post.id %>" class="post-card" data-post="<%= post.id %>" data-location="<%= post.location.id %>">
     <%= cl_image_tag(post.photo.image.key, width: 300) %>
     <div class="post-info">
-      <h5 class="title"><%= post.title %></h5>
-      <%= render 'components/location_link', location: post.location %>
+
+      <div class="title-and-location">
+        <h5 class="title"><%= post.title %></h5>
+        <%= render 'components/location_link', location: post.location %>
+      </div>
     </div>
   </div>
 <% end %>

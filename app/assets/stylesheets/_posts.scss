@@ -8,18 +8,24 @@
   }
 
   .post-info {
-    padding-left: 3px;
+    display: flex;
 
-    .title {
-      margin: 0px;
-      margin-bottom: 3px;
-    }
+    .title-and-location {
+      margin-left: 5px;
 
-    .location-info {
-      .location-title {
+      .title {
         margin: 0px;
-        margin-left: 3px;
-        color: $primary;
+        margin-bottom: 3px;
+        margin-top: 4px;
+        font-weight: 500;
+      }
+
+      .location-info {
+        .location-title {
+          margin: 0px;
+          margin-left: 3px;
+          color: $primary;
+        }
       }
     }
   }

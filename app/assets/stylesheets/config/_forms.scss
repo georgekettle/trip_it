@@ -12,7 +12,7 @@ form {
       font-size: 14px;
     }
 
-    em {
+    em, i {
       color: $black;
       padding-bottom: 5px;
       font-size: 12px;
@@ -96,6 +96,27 @@ button:focus {
   height: 90%;
   width: 90%;
   border-radius: 20px;
+}
+
+#error_explanation {
+  background: $primaryLight;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+
+  h2 {
+    font-size: 16px;
+    margin-bottom: 5px;
+    color: $primary;
+  }
+
+  ul {
+    margin: 0px;
+
+    li {
+      font-size: 14px;
+    }
+  }
 }
 
 

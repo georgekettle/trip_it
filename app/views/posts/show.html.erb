@@ -8,6 +8,7 @@
       <% end %>
       <h1 class="title"><%= @post.title %></h1>
       <p class="description"><%= @post.description %></p>
+      <%= render 'components/avatar', image: @post.user.avatar, size: 40, link: profile_path(@post.user), title: @post.user.format_username %>
     </div>
   </div>
   <div class="location-section">

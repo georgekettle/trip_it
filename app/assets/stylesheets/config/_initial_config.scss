@@ -64,21 +64,27 @@ ul {
 .button-sml {
   padding: 5px 10px;
   border-radius: 12px;
-  border: 1px solid $black;
+  background: $black10;
   font-size: 15px;
+  align-items: center;
+  display: flex;
 }
 
 .button-med {
   padding: 10px 15px;
   border-radius: 15px;
-  border: 1px solid $black;
+  background: $black10;
+  align-items: center;
+  display: flex;
 }
 
 .button-lrg {
   padding: 12px 20px;
   border-radius: 20px;
-  border: 1px solid $black;
+  background: $black10;
   font-size: 20px;
+  align-items: center;
+  display: flex;
 }
 
 .button-color {

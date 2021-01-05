@@ -1,5 +1,6 @@
 class BoardsController < ApplicationController
   include MapboxDataFormatter
+  skip_before_action :authenticate_user!, only: [:show]
   before_action :set_board, only: [:show, :edit, :update, :destroy]
   layout 'map_layout', only: [:show]
 

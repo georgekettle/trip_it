@@ -15,7 +15,7 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
     @post.user = current_user
     @post.photo = Photo.new(post_params[:photo_attributes])
-    create_location
+    create_location(post_params)
 
     respond_to do |format|
       if @post.save && @post.location.save
@@ -79,8 +79,17 @@ class PostsController < ApplicationController
 
 private
 
-  def create_location
-    @post.location = Location.where(longitude: post_params[:location_attributes][:longitude], latitude: post_params[:location_attributes][:latitude]).first_or_create(post_params[:location_attributes])
+  def create_location(params)
+    # had to edit params[:location_attributes] as it was changing the values between searching and first_or_create
+    # ... (Super weird, and so I fixed by editing the params in hash like so)
+    loc_attr = params[:location_attributes].to_h
+    loc_attr['longitude'] = params[:location_attributes][:longitude].to_f
+    loc_attr['latitude'] = params[:location_attributes][:latitude].to_f
+
+    @post.location = Location.where(
+                          longitude: params[:location_attributes][:longitude].to_f,
+                          latitude: params[:location_attributes][:latitude].to_f
+                      ).first_or_create(loc_attr)
   end
 
   # def create_photo

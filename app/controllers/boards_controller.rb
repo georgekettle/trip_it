@@ -9,7 +9,7 @@ class BoardsController < ApplicationController
   end
 
   def show
-    @posts = @board.posts.paginate(page: params[:page], per_page: 5)
+    @posts = @board.posts.paginate(page: params[:page], per_page: 20)
     @features = MapboxDataFormatter.format_features(@posts)
     @bbox = MapboxDataFormatter.set_bbox(@features)
   end

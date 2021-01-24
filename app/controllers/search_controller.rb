@@ -4,10 +4,10 @@ class SearchController < ApplicationController
   layout 'map_layout'
 
   def search
+    @bbox = set_bbox
     @locations = get_locations
     @posts = get_paginated_results(@locations)
     @features = MapboxDataFormatter.format_features(@posts)
-    @bbox = set_bbox
   end
 
   private
@@ -15,23 +15,23 @@ class SearchController < ApplicationController
   def set_bbox
     if params[:bbox]
       bbox_arr = params[:bbox].split(/,/).map(&:to_f)
-      return [
-        [bbox_arr[0], bbox_arr[1]],
-        [bbox_arr[2], bbox_arr[3]]
-      ]
-    else
-      return MapboxDataFormatter.set_bbox(@features, @lng_lat)
+      sw_corner = [bbox_arr[0], bbox_arr[1]]
+      ne_corner = [bbox_arr[2], bbox_arr[3]]
+      [sw_corner, ne_corner]
     end
   end
 
+  def reverse_bbox_coords
+    sw_corner = @bbox[0].reverse
+    ne_corner = @bbox[1].reverse
+    [sw_corner, ne_corner]
+  end
+
   def get_paginated_results(locations)
-    Post.where(location: locations.to_a).sort_by(&:photo_popularity).paginate(page: params[:page], per_page: 5)
+    Post.where(location: locations.to_a).sort_by(&:photo_popularity).paginate(page: params[:page], per_page: 20)
   end
 
   def get_locations
-    radius = 50
-    @lng_lat = [ params[:lng].to_f, params[:lat].to_f ]
-    @lat_lng = [ params[:lat].to_f, params[:lng].to_f ]
-    return Location.near(@lat_lng, radius, units: :km)
+    Location.within_bounding_box(reverse_bbox_coords)
   end
 end

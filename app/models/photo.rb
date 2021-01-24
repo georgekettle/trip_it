@@ -1,4 +1,6 @@
 class Photo < ApplicationRecord
+  include Rails.application.routes.url_helpers
+
   has_one_attached :image, dependent: :destroy
   has_many :posts
   before_destroy :cleanup
@@ -7,6 +9,11 @@ class Photo < ApplicationRecord
 
   def post_count
     self.posts.count
+  end
+
+  def photo_url
+    return rails_blob_path(self.image, only_path: true) if self.image.attached?
+    return nil
   end
 
   private

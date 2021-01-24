@@ -1,6 +1,12 @@
 <div class="account-menu" data-controller="dropdown">
-  <div class="menu-button flex-center" data-action="click->dropdown#toggle">
-    <%= render 'icons/user' %>
+  <div data-action="click->dropdown#toggle">
+    <% if current_user&.avatar %>
+      <%= render 'components/avatar', image: current_user.avatar, size: 40, style: 'margin-left: 10px' %>
+    <% else %>
+      <div class="menu-button flex-center">
+        <%= render 'icons/user' %>
+      </div>
+    <% end %>
   </div>
   <div class="dropdown-menu display-none" data-dropdown-target="toggleable">
     <% if current_user %>

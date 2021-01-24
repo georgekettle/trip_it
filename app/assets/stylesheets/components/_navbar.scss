@@ -50,7 +50,7 @@
   .menu-button, .create-button {
     width: 40px;
     height: 40px;
-    background: $black5;
+    background: $black10;
     border-radius: 30px;
     padding-bottom: 3px;
     cursor: pointer;
@@ -62,9 +62,7 @@
   }
 
   .menu-button {
-    background: $white;
-    box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
-    border: 1px solid $black2;
+    border: 1.5px solid $white;
   }
 
   .dropdown-menu {

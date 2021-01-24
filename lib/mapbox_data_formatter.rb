@@ -5,7 +5,20 @@ module MapboxDataFormatter
     locations = grouped_by_location.keys
     locations.map do |loc|
       location_hash = loc.attributes
-      location_hash[:posts] = grouped_by_location[loc].as_json(include: :photo)
+      location_hash[:posts] = grouped_by_location[loc].as_json(:include => [
+        :location,
+        {
+          :photo => {
+            :include => {
+              :image => {
+                :methods => :service_url
+                # :include => :service_url
+              }
+            }
+          }
+        }])
+      # byebug
+      # .as_json(:include => { :photo => { :include => {:photo_url} } })
 
       feature = {
         type: "Feature",

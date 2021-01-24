@@ -1,6 +1,6 @@
 <%= link_to post_path(post), class: "no-highlight" do %>
   <div id="post-<%= post.id %>" class="post-card" data-post="<%= post.id %>" data-location="<%= post.location.id %>">
-    <%= cl_image_tag(post.photo.image.key, width: 300) %>
+    <%= cl_image_tag(post.photo.image.key, width: 450, :crop => "pad") %>
     <div class="post-info">
 
       <div class="title-and-location">

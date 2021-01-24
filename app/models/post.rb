@@ -14,4 +14,24 @@ class Post < ApplicationRecord
   def photo_popularity
     self.photo.post_count
   end
+
+  def photo_url
+    self.photo.image.service_url
+  end
+
+  def to_json(options={})
+    super(:include => [
+      :location,
+      {
+        :photo => {
+          :include => {
+            :image => {
+              :methods => :service_url
+              # :include => :service_url
+            }
+          }
+        }
+      }]
+    )
+  end
 end

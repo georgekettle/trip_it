@@ -11,4 +11,9 @@
   <% @user.boards.each do |board| %>
     <%= render 'boards/board', board: board %>
   <% end %>
+  <% if @user.boards.empty? %>
+    <div class="flex-center no-boards">
+      <h4>No boards yet...</h4>
+    </div>
+  <% end %>
 </div>

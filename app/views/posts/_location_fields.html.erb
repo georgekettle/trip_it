@@ -1,4 +1,4 @@
-<div class="nested-fields">
+<div class="nested-fields" style="width: 100%">
   <div class="display-none">
       <%= form.label :title %>
       <%= form.text_field :title, id: 'title' %>
@@ -44,7 +44,7 @@
             draggable: true
           })
             .setLngLat([longitudeField.value, latitudeField.value])
-            <% if @post.location && @post.location.longitude && @post.location.latitude %>
+            <% if post.location && post.location.longitude && post.location.latitude %>
               .addTo(map)
             <% end %>;
 

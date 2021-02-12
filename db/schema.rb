@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_05_065726) do
+ActiveRecord::Schema.define(version: 2021_02_06_105118) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -69,18 +69,25 @@ ActiveRecord::Schema.define(version: 2021_01_05_065726) do
 
   create_table "posts", force: :cascade do |t|
     t.text "title", null: false
-    t.text "description"
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "board_id", null: false
     t.bigint "location_id", null: false
-    t.string "url"
     t.bigint "photo_id", null: false
     t.index ["board_id"], name: "index_posts_on_board_id"
     t.index ["location_id"], name: "index_posts_on_location_id"
     t.index ["photo_id"], name: "index_posts_on_photo_id"
     t.index ["user_id"], name: "index_posts_on_user_id"
+  end
+
+  create_table "saves", force: :cascade do |t|
+    t.bigint "post_id", null: false
+    t.bigint "board_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["board_id"], name: "index_saves_on_board_id"
+    t.index ["post_id"], name: "index_saves_on_post_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -105,4 +112,6 @@ ActiveRecord::Schema.define(version: 2021_01_05_065726) do
   add_foreign_key "posts", "locations"
   add_foreign_key "posts", "photos"
   add_foreign_key "posts", "users"
+  add_foreign_key "saves", "boards"
+  add_foreign_key "saves", "posts"
 end

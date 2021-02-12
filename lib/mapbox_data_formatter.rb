@@ -12,7 +12,6 @@ module MapboxDataFormatter
             :include => {
               :image => {
                 :methods => :service_url
-                # :include => :service_url
               }
             }
           }

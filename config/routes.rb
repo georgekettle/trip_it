@@ -1,10 +1,12 @@
 Rails.application.routes.draw do
   devise_for :users
   resources :boards
-  resources :posts, except: [:index]
-  get "/posts/:id/save", to: 'posts#new_save', as: 'new_save'
-  post "/posts/:id/save", to: 'posts#save', as: 'save'
-  # post "/posts/:id/remove_photo", to: "posts#remove_photo", as: 'remove_photo_from_post'
+  resources :posts, except: [:index] do
+    resources :saves, shallow: true
+  end
+
+  post "/create_post/:current_step/validate_step", to: "wizards#validate_step", as: 'validate_post_wizard'
+  get "/create_post/:current_step", to: "wizards#step1", as: 'post_wizard'
   resources :locations, except: [:new, :create]
   post "/photos/:photo_id/locations", to: "locations#create"
   get 'profile/:id', to: 'profiles#show', as: 'profile'

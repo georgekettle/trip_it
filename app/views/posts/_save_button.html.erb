@@ -1,11 +1,10 @@
-<% if post.user == current_user %>
-  <%= link_to new_save_path(post), class: "save-button saved" do %>
-    <%= render 'icons/bookmark', stroke_width: 1.5, size: 22, color: "#FF6941", fill_color: "#FF6941" %>
-    <h4>Saved</h4>
+<% if current_user && post.boards.any?{|e| current_user.boards.map(&:id).include?(e.id)} %>
+  <%= link_to edit_save_path(current_user.saves.find_by(post_id: post.id)), class: "save-button saved" do %>
+    <%= render 'icons/bookmark', stroke_width: 1.5, size: 22, color: "black", fill_color: "black" %>
+    <h3>Saved</h3>
   <% end %>
 <% else %>
-  <%= link_to new_save_path(post), class: "save-button" do %>
-    <%= render 'icons/bookmark', stroke_width: 1.5, size: 22, color: "white" %>
-    <h4>Save</h4>
+  <%= link_to new_post_save_path(post), class: "save-button" do %>
+    <%= render 'icons/bookmark', stroke_width: 1.5, size: 24, color: "black" %>
   <% end %>
 <% end %>

@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Post:</strong>
+  <%= @save.post_id %>
+</p>
+
+<p>
+  <strong>Board:</strong>
+  <%= @save.board_id %>
+</p>
+
+<%= link_to 'Edit', edit_save_path(@save) %> |
+<%= link_to 'Back', saves_path %>

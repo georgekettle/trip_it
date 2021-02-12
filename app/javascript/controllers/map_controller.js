@@ -33,6 +33,9 @@ export default class extends Controller {
       maxZoom: 13
     });
 
+    // add controls
+    map.addControl(new mapboxgl.NavigationControl());
+
     console.log(geojson);
     map.on('load', function () {
     // Add a new source from our GeoJSON data and
@@ -104,9 +107,9 @@ export default class extends Controller {
         if (err) return;
 
         map.easeTo({
-        center: features[0].geometry.coordinates,
-        zoom: zoom
-      });
+          center: features[0].geometry.coordinates,
+          zoom: zoom
+        });
       }
       );
     });
@@ -116,9 +119,9 @@ export default class extends Controller {
     // the location of the feature, with
     // description HTML from its properties.
     map.on('click', 'unclustered-point', function (e) {
-      console.log(e.target);
+      // console.log(e.target);
       var coordinates = e.features[0].geometry.coordinates.slice();
-      console.log(JSON.parse(e.features[0]["properties"]["posts"]));
+      // console.log(JSON.parse(e.features[0]["properties"]["posts"]));
       var posts = JSON.parse(e.features[0]["properties"]["posts"]);
       // var mag = e.features[0].properties.mag;
       // var tsunami;
@@ -134,30 +137,26 @@ export default class extends Controller {
       // popup appears over the copy being pointed to.
       while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
         coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-      }
+      };
 
+      var locationId = e.features[0]["properties"]["id"];
+      var popup = document.getElementById(`map-popup-location-${locationId}`);
+      let popupClone = popup.cloneNode(true);
 
       new mapboxgl.Popup()
         .setLngLat(coordinates)
-        .setHTML(`<div style="height: 200px;width: 200px" class="mapbox-popup-photo"><img src=${posts[0]["photo"]["image"]["service_url"]} alt=${posts[0]["title"]} width="200" height="200" style="object-fit: cover;min-width: 100%;min-height: 100%;"/></div>`)
+        .setDOMContent(popupClone)
+        // .setHTML(`<div style="height: 200px;width: 200px" class="mapbox-popup-photo"><img src=${posts[0]["photo"]["image"]["service_url"]} alt=${posts[0]["title"]} width="200" height="200" style="object-fit: cover;min-width: 100%;min-height: 100%;"/></div>`)
         .addTo(map);
+      });
+
+      map.on('mouseenter', 'clusters', function () {
+        map.getCanvas().style.cursor = 'pointer';
+      });
+      map.on('mouseleave', 'clusters', function () {
+        map.getCanvas().style.cursor = '';
+      });
     });
-
-    map.on('mouseenter', 'clusters', function () {
-      map.getCanvas().style.cursor = 'pointer';
-    });
-    map.on('mouseleave', 'clusters', function () {
-      map.getCanvas().style.cursor = '';
-    });
-    });
-  }
-
-  addMarkers(map) {
-
-  }
-
-  markerMouseEnter() {
-
   }
 }
 

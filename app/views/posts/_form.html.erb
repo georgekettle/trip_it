@@ -12,7 +12,11 @@
   <% end %>
 
   <div class="col-half">
-    <div class="upload-container" data-controller="image-uploader" data-action="click->image-uploader#openImageSelect">
+    <% if action_name == "edit" %>
+      <div class="upload-container cursor-normal" data-controller="image-uploader">
+    <% else %>
+      <div class="upload-container" data-controller="image-uploader" data-action="click->image-uploader#openImageSelect">
+    <% end %>
       <%= form.fields_for :photo do |photo_form| %>
         <%= render 'components/image_uploader', form: photo_form, form_object_image: photo_form.object.image %>
 
@@ -24,18 +28,7 @@
 
   <div class="col-half">
     <div class="field">
-      <%= form.label :title %>
-      <%= form.text_field :title %>
-    </div>
-
-    <div class="field">
-      <%= form.label :description %>
-      <%= form.text_field :description %>
-    </div>
-
-    <div class="field">
-      <%= form.label :board %>
-      <%= collection_select(:post, :board_id, current_user.boards, :id, :title, prompt: true) %>
+      <%= form.text_field :title, placeholder: "Add a Title" %>
     </div>
 
     <%= form.fields_for :location do |location_form| %>

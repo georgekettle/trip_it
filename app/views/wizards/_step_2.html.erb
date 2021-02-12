@@ -1,0 +1,23 @@
+<%= render 'components/page_header', header: 'Add Location', back_link: post_wizard_path('step1') %>
+
+<%= form_with(model: @post_wizard.post, :url => "/create_post/#{params[:current_step]}/validate_step", scope: 'post', local: true, class: 'post-form') do |form| %>
+  <% if @post_wizard.post.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@post_wizard.post.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+      <ul>
+        <% @post_wizard.post.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= form.fields_for :location, @location do |location_form| %>
+    <%= render "posts/location_fields", form: location_form, post: @post_wizard.post %>
+  <% end %>
+
+  <div class="actions">
+    <%= form.submit "Continue", data: { disable_with: "Please wait..." } %>
+  </div>
+<% end %>

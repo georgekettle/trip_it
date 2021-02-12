@@ -1,0 +1,86 @@
+#map {
+  .mapboxgl-popup {
+    width: 240px;
+
+    .mapboxgl-popup-content {
+      border-radius: 14px;
+      padding: 3px;
+      width: 100%;
+
+      .mapbox-popup-container {
+        width: 100%;
+
+        .photo-carousel {
+          width: 100%;
+          height: 130px;
+          overflow-x: scroll;
+          overflow-y: hidden;
+          display: flex;
+          align-items: center;
+          border-radius: 10px 10px 0px 0px;
+
+          .photo-container {
+            width: 130px;
+            height: 130px;
+            flex-shrink: 0;
+            margin-right: 3px;
+
+            .popup-image {
+              object-fit: cover;
+              width: 100%;
+              height: 100%;
+              border-radius: 5px;
+            }
+          }
+        }
+
+        .popup-info {
+          padding: 10px 5px;
+
+          h3 {
+            margin: 0px;
+            margin-bottom: 3px;
+          }
+
+          h6 {
+            color: $black30;
+          }
+
+          .see-location {
+            height: 30px;
+            width: 30px;
+            border-radius: 30px;
+            align-items: center;
+            justify-content: center;
+            display: flex;
+            padding-bottom: 0px;
+            background: transparent;
+
+            &:hover {
+              background: $black5;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .mapboxgl-popup-close-button {
+    display: none
+  }
+
+  .mapboxgl-popup-anchor-top-left .mapboxgl-popup-content {
+    border-top-left-radius: 0;
+  }
+
+  .mapboxgl-popup-anchor-top-right .mapboxgl-popup-content {
+    border-top-right-radius: 0;
+  }
+
+  .mapboxgl-popup-anchor-bottom-right .mapboxgl-popup-content {
+    border-bottom-right-radius: 0;
+  }
+  .mapboxgl-popup-anchor-bottom-left .mapboxgl-popup-content {
+    border-bottom-left-radius: 0;
+  }
+}

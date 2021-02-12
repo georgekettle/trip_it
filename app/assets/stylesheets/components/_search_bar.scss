@@ -48,4 +48,20 @@
   }
 }
 
+.navbar {
+  #geocoder {
+    max-width: 250px;
+
+    .mapboxgl-ctrl-geocoder.mapboxgl-ctrl {
+      box-shadow: none;
+    }
+
+    .mapboxgl-ctrl-geocoder--input {
+      padding: 10px 15px;
+      height: unset;
+      font-family: GT Walsheim Pro;
+      background-color: $black5;
+    }
+  }
+}
 

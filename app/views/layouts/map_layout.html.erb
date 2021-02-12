@@ -23,16 +23,22 @@
   </head>
 
   <body>
-    <div class="map-layout-container">
+    <div class="map-layout-container" data-controller="map-layout" data-map-layout-target="container">
       <div class="map-layout-content">
-        <%= render 'components/navbar', absolute: true %>
+        <%= render 'components/navbar' %>
         <div class="content-scroll">
           <div class="map-layout-yield">
             <%= yield %>
           </div>
         </div>
       </div>
-      <div id="map" class="side-map-sticky" data-controller="map" data-mapbox-token="<%= ENV['MAPBOX_TOKEN'] %>" data-bbox="<%= @bbox %>" data-posts="<%= @posts.to_json %>" data-features="<%= @features.to_json %>"></div>
+      <div class="side-map-sticky">
+        <a href="#" class="icon-button show-side-bar" data-action="click->map-layout#toggleMap">
+          <%= render 'icons/minimize' %>
+          <%= render 'icons/expand' %>
+        </a>
+        <div id="map" data-controller="map" data-mapbox-token="<%= ENV['MAPBOX_TOKEN'] %>" data-bbox="<%= @bbox %>" data-posts="<%= @posts.to_json %>" data-features="<%= @features.to_json %>"></div>
+      </div>
     </div>
     <%= render 'components/alert' %>
 

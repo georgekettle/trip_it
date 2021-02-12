@@ -1,0 +1,27 @@
+<%= render 'components/page_header', header: 'Details & Save', back_link: post_wizard_path('step2') %>
+
+<%= form_with(model: @post_wizard.post, :url => "/create_post/#{params[:current_step]}/validate_step", scope: 'post', local: true, class: 'post-form') do |form| %>
+  <% if @post_wizard.post.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@post_wizard.post.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+      <ul>
+        <% @post_wizard.post.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.text_field :title, placeholder: "Add a Title" %>
+  </div>
+
+  <div class="field">
+    <%= collection_select(:post, :board_id, current_user.boards, :id, :title, prompt: true, :selected => @post_wizard.post.board_id || nil) %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Finish", data: { disable_with: "Creating Post..." } %>
+  </div>
+<% end %>

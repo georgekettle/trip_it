@@ -3,7 +3,7 @@
     <%= render 'icons/plus', color: 'white' %>
   </div>
   <div class="dropdown-menu display-none" data-dropdown-target="toggleable">
-    <%= link_to "Add Post", new_post_path %>
+    <%= link_to "Add Post", post_wizard_path("step1") %>
     <%= link_to "Add board", new_board_path %>
   </div>
 </div>

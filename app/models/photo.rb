@@ -16,6 +16,14 @@ class Photo < ApplicationRecord
     return nil
   end
 
+  def most_popular_posts
+    # come back and fix up
+    self.posts
+      .left_joins(:saves)
+      .group(:id)
+      .order('COUNT(saves.id) DESC')
+  end
+
   private
 
   def cleanup

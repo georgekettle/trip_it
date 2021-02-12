@@ -33,12 +33,9 @@ class PostsController < ApplicationController
   end
 
   def update
+    create_location
     respond_to do |format|
-      if @post.update(post_params)
-        if post_params[:photo_attributes][:image].present?
-          @post.photo.image.purge
-          @post.photo.image.attach(post_params[:photo_attributes][:image])
-        end
+      if @post.update(post_params.except(:photo_attributes)) && @post.location.save
         format.html { redirect_to @post, notice: 'Post was successfully updated.' }
         format.json { render :show, status: :ok, location: @post }
         format.js
@@ -58,24 +55,25 @@ class PostsController < ApplicationController
     end
   end
 
-  def new_save
-  end
+  # def new_save
+  # end
 
-  def save
-    @post = @post.dup unless @post.user == current_user
-    @post.user = current_user
-    respond_to do |format|
-      if @post.update(post_params)
-        format.html { redirect_to @post, notice: "Post saved to '#{@post.board.title.capitalize}'." }
-        format.json { render :show, status: :ok, location: @post }
-        format.js
-      else
-        format.html { render :new_save, alert: "Oops! There was an error saving the post" }
-        format.json { render json: @post.errors, status: :unprocessable_entity }
-        format.js
-      end
-    end
-  end
+  # def save
+  #   @new_post = @post.dup unless @post.user == current_user
+  #   @new_post.user = current_user
+  #   @save = Save.new(original_post_id: @post.id)
+  #   respond_to do |format|
+  #     if @new_post.update(post_params) && @save.update(saved_post_id: @new_post.id)
+  #       format.html { redirect_to @new_post, notice: "Post saved to '#{@new_post.board.title.capitalize}'." }
+  #       format.json { render :show, status: :ok, location: @new_post }
+  #       format.js
+  #     else
+  #       format.html { render :new_save, alert: "Oops! There was an error saving the post" }
+  #       format.json { render json: @new_post.errors, status: :unprocessable_entity }
+  #       format.js
+  #     end
+  #   end
+  # end
 
 private
 
@@ -83,24 +81,12 @@ private
     @post.location = Location.where(longitude: post_params[:location_attributes][:longitude], latitude: post_params[:location_attributes][:latitude]).first_or_create(post_params[:location_attributes])
   end
 
-  # def create_photo
-  #   if params[:post][:photo]
-  #     cloudinary_obj = Cloudinary::Uploader.upload(params[:post][:photo])
-  #     @photo = Photo.new(url: cloudinary_obj["secure_url"], cloudinary_id: cloudinary_obj["public_id"])
-  #     if @photo.save
-  #       @post.photo_id = @photo.id
-  #     else
-  #       Cloudinary::Api.delete_resources([cloudinary_obj["public_id"]])
-  #     end
-  #   end
-  # end
-  # Use callbacks to share common setup or constraints between actions.
   def set_post
     @post = Post.find(params[:id])
   end
 
   # Only allow a list of trusted parameters through.
   def post_params
-    params.require(:post).permit(:title, :description, :board_id, location_attributes: [:longitude, :latitude, :address, :title], photo_attributes: [:image])
+    params.require(:post).permit(:title, :board_id, location_attributes: [:longitude, :latitude, :address, :title, :id], photo_attributes: [:image, :id])
   end
 end

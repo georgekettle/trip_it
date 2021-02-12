@@ -25,7 +25,7 @@ class SearchController < ApplicationController
   end
 
   def get_paginated_results(locations)
-    Post.where(location: locations.to_a).sort_by(&:photo_popularity).paginate(page: params[:page], per_page: 5)
+    Post.where(location: locations.to_a).sort_by(&:photo_popularity).paginate(page: params[:page], per_page: 30)
   end
 
   def get_locations

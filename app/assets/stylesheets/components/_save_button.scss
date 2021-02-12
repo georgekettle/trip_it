@@ -1,27 +1,17 @@
 .save-button {
-  padding: 5px 10px;
-  padding-left: 5px;
-  background: $primary;
-  border-radius: 10px;
+  padding: 10px;
+  background: $white;
+  border-radius: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
 
-  h4 {
+  h3 {
     margin: 0px;
-    margin-left: 5px;
-    color: $white;
-  }
-
-  &:hover {
-    opacity: 0.75;
   }
 }
 
 .save-button.saved {
-  background: $primaryLight;
-
-  h4 {
-    color: $primary;
-  }
+  background: $white;
+  border: 1px solid $black5;
 }

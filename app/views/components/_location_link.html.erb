@@ -1,6 +1,6 @@
-<%= link_to "/search/#{location.longitude}/#{location.latitude}" do %>
+<%= link_to "/search/#{location.longitude}/#{location.latitude}?name=#{location.title}" do %>
   <div class="flex-align-center location-info">
     <%= render 'icons/pin', size: 10 %>
-    <h6 class="location-title"><%= location.title %></h6>
+    <h3 class="font-sml location-title"><%= location.title %></h3>
   </div>
 <% end %>

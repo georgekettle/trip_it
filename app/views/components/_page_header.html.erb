@@ -1,13 +1,18 @@
 <% padding_horizontal ||= "30px" %>
 <% padding_vertical ||= "0px" %>
 <% back ||= false %>
+<% back_link ||= nil %>
 <% edit ||= nil %>
 
 <div class="page-header" style="padding: <%= padding_vertical %> <%= padding_horizontal %>">
   <!-- header position absolute center -->
-  <h1 class="text-center"><%= header %></h1>
+  <h1 class="text-center font-lrg"><%= header %></h1>
 
-  <% if back %>
+  <% if back_link %>
+    <%= link_to back_link, class: "icon-button" do %>
+      <%= render 'icons/arrow_left' %>
+    <% end %>
+  <% elsif back %>
     <%= link_to :back, class: "icon-button" do %>
       <%= render 'icons/arrow_left' %>
     <% end %>

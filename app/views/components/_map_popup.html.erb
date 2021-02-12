@@ -1,0 +1,21 @@
+<% location = post.location %>
+<div id="map-popup-location-<%= post.location.id %>" class="mapbox-popup-container">
+  <div class="photo-carousel">
+    <% location.photos.each do |photo| %>
+      <%= link_to post_path(photo.most_popular_posts.first) do %>
+        <div class="photo-container">
+          <%= cl_image_tag(photo.image.key, width: 400, class: 'popup-image') %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="popup-info flex-space-between flex-align-center">
+    <%= link_to location_path(location) do %>
+      <h3><%= location.title %></h3>
+      <h6 class="font-sml margin0"><%= location.photo_count_formatted %></h6>
+    <% end %>
+    <%= link_to location_path(location), class: 'see-location' do %>
+      <%= render 'icons/arrow_right' %>
+    <% end %>
+  </div>
+</div>

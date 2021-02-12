@@ -11,8 +11,12 @@
     align-items: center;
     justify-content: space-between;
     margin-bottom: 20px;
+    margin-top: 20px;
 
     .search-info {
+      margin: 30px auto;
+      text-align: center;
+
       h4 {
         margin: 0px;
         color: $black30;
@@ -23,7 +27,7 @@
         margin-bottom: 0px;
         // opacity: 0.25;
         margin-bottom: 2px;
-        color: $primary;
+        color: $secondary;
       }
 
       .search-info-query {

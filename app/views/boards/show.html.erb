@@ -1,18 +1,21 @@
-<%= render 'components/page_header', header: "#{@board.title.capitalize}", back: true, padding_horizontal: '0px' %>
-<!-- <% @board.users.each do |user| %>
-  <%= link_to "#{user.email}", profile_path(user.id) %>
-<% end %>
-
-<%= link_to "Edit", edit_board_path(@board) %>
-<%= link_to "Destroy", board_path(@board), :method => :delete %> -->
-
-<div class="grid" data-masonry='{ "itemSelector": ".grid-item", "percentageWidth": true }'>
-  <% @posts.each do |post| %>
-    <div class="grid-item">
-      <%= render 'posts/post', post: post %>
-    </div>
+<div class="board-header flex-direction-column flex-align-center">
+  <h1 class="font-lrg"><%= @board.title.capitalize %></h1>
+  <% @board.board_users.each_with_index do |b_user, index| %>
+    <%= render "components/avatar", link: profile_path(b_user.user), image: b_user.user.avatar, size: 30 %>
   <% end %>
 </div>
 
-<%= render 'components/pagination', items: @posts %>
+<% unless @posts.empty? %>
+  <div class="grid" data-masonry='{ "itemSelector": ".grid-item", "percentageWidth": true }'>
+    <% @posts.each do |post| %>
+      <div class="grid-item">
+        <%= render 'posts/post', post: post %>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <div class="no-posts flex-direction-column flex-align-center">
+    <h4>This board is empty</h4>
+  </div>
+<% end %>
 

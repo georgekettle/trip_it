@@ -1,10 +1,17 @@
 <div class="post-header">
   <div class="flex-center">
-    <% if post.user == current_user %>
+    <% if current_user && post.user == current_user %>
       <%= link_to post_path(post), :method => :delete, class: "options-button", data: {confirm: 'Are you sure?'} do %>
         <%= render 'icons/delete', stroke_width: 1.5 %>
       <% end %>
       <%= link_to edit_post_path(post), class: "options-button" do %>
+        <%= render 'icons/edit', stroke_width: 1.5 %>
+      <% end %>
+    <% elsif current_user &&  post.boards.include?(current_user.boards) %>
+      <%= link_to save_path(post), :method => :delete, class: "options-button", data: {confirm: 'Are you sure?'} do %>
+        <%= render 'icons/delete', stroke_width: 1.5 %>
+      <% end %>
+      <%= link_to edit_save_path(post), class: "options-button" do %>
         <%= render 'icons/edit', stroke_width: 1.5 %>
       <% end %>
     <% end %>

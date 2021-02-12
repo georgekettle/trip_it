@@ -1,0 +1,16 @@
+<%= render 'components/page_header', header: "Save to board", back: true %>
+
+<%= form_with url: post_saves_path(@post), scope: @save, method: :post, local: true, class: "select-board-list" do |form| %>
+  <!-- ** ADD ERROR INFORMATION ** -->
+  <% current_user.boards.each do |board| %>
+    <% @active = @post.boards.any?{ |e| e == board } %>
+    <%= form.radio_button :board_id, board.id, :checked => @active %>
+    <%= label :save_board_id, "#{board.id}" do %>
+      <%= render 'boards/board_list_item', board: board %>
+    <% end %>
+  <% end %>
+  <%= link_to new_board_path do %>
+    <%= render 'boards/board_list_item', is_create_new: true %>
+  <% end %>
+  <%= form.submit "Save", data: { disable_with: "Saving..." } %>
+<% end %>

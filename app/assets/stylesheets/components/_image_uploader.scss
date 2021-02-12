@@ -8,7 +8,7 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  margin-bottom: 20px;
+  min-height: 100px;
 
   .image-preview-container {
     min-width: 100%;
@@ -16,18 +16,19 @@
 
   &:hover {
     .new-image {
-      border: dashed 2px $black30;
+      // border: dashed 2px $black30;
 
       .plus-button {
-        height: 42px;
-        width: 42px;
+        height: 36px;
+        width: 36px;
         border-radius: 21px;
-        background: $black30;
+        background: $black90;
         margin-bottom: 8px;
+        margin-right: 8px;
       }
 
       h4 {
-        color: $black40;
+        color: $black90;
       }
     }
   }
@@ -48,26 +49,28 @@
     height: 400px;
     margin: 10px;
     border-radius: 11px;
-    border: 1px dashed #ffffff;
+    // border: 1px dashed #ffffff;
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-direction: column;
     border: dashed 2px $black20;
     transition: 0.2s ease;
 
     .plus-button {
-      height: 40px;
-      width: 40px;
+      height: 30px;
+      width: 30px;
       border-radius: 20px;
-      background: $black20;
+      background: $black40;
       margin-bottom: 10px;
       transition: 0.2s ease;
+      margin-right: 10px;
     }
 
     h4 {
-      color: $black30;
+      color: $black50;
       transition: 0.2s ease;
+      font-weight: 700;
+      letter-spacing: -0.5px;
     }
   }
 }

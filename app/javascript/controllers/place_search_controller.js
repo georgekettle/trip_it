@@ -7,6 +7,7 @@ export default class extends Controller {
 
   initGeocoder() {
     var searchElement = this.element;
+    searchElement.innerHTML = '';
     var geocoder = new MapboxGeocoder({
         accessToken: searchElement.dataset.mapboxToken,
         types: 'country,region,place,postcode,locality,neighborhood'

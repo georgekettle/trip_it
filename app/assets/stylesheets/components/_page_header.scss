@@ -1,6 +1,6 @@
 .page-header {
   padding: 0px 30px;
-  margin-top: 10px;
+  margin-top: 30px;
   position: relative;
   margin-bottom: 30px;
   display: flex;
@@ -15,25 +15,25 @@
     margin: 0px;
   }
 
-  .icon-button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    background: $black5;
-    border-radius: 50%;
-    cursor: pointer;
-
-    &:hover {
-      background: $black10;
-      opacity: 1;
-    }
-  }
-
   .extra-options {
     .icon-button {
       margin-left: 10px;
     }
+  }
+}
+
+.icon-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: $black5;
+  border-radius: 50%;
+  cursor: pointer;
+
+  &:hover {
+    background: $black10;
+    opacity: 1;
   }
 }

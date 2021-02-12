@@ -1,9 +1,17 @@
+<% absolute ||= nil %>
+<% sticky ||= nil %>
+
 <% if absolute %>
   <div class="navbar absolute flex-space-between">
+<% elsif sticky %>
+  <div class="navbar sticky top flex-space-between">
 <% else %>
-  <div class="navbar sticky flex-space-between">
+  <div class="navbar flex-space-between">
 <% end %>
-  <%= render partial: 'components/logo' %>
+  <div class="flex-align-center navbar-left">
+    <%= render partial: 'components/logo' %>
+    <%= render partial: 'search/search_bar' %>
+  </div>
   <div class="navbar-right">
     <% if current_user %>
       <%= render 'components/create_dropdown' %>

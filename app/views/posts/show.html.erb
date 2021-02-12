@@ -3,12 +3,13 @@
     <%= cl_image_tag(@post.photo.image.key, class: "photo") if @post.photo.image.attached? %>
     <div class="post-info">
       <%= render 'posts/show_header', post: @post %>
-      <% if @post.url %>
-        <%= render 'components/url_link', url: @post.url %>
-      <% end %>
       <h1 class="title"><%= @post.title %></h1>
-      <p class="description"><%= @post.description %></p>
-      <%= render 'components/avatar', image: @post.user.avatar, size: 40, link: profile_path(@post.user), title: @post.user.format_username %>
+      <div class="user-saved-to flex-align-center">
+        <%= render 'components/avatar', image: @post.user.avatar, size: 30, link: profile_path(@post.user) %>
+        <%= link_to profile_path(@post.user) do %>
+          <h5>@<%= @post.user.username %></h5>
+        <% end %>
+      </div>
     </div>
   </div>
   <div class="location-section">

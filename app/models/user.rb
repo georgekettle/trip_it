@@ -3,6 +3,7 @@ class User < ApplicationRecord
   has_many :posts
   has_many :board_users
   has_many :boards, :through => :board_users
+  has_many :saves, through: :boards
   validates :username, presence:true, uniqueness: {case_sensitive: false}
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
